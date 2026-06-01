@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LARŌ — Organic Skin Rituals</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream: #F9F7F6;
+    --pink: #E9D9D6;
+    --dark: #2A1A1B;
+    --text: #3D2B2C;
+    --muted: #8A7070;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    padding: 24px 48px;
+    background: transparent;
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: var(--cream); border-bottom: 1px solid var(--pink); }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; letter-spacing: 0.3em;
+    color: var(--garnet); text-decoration: none;
+  }
+  .nav-logo span { font-weight: 300; letter-spacing: 0.05em; font-size: 0.65rem; display: block; text-align: center; color: var(--muted); margin-top: -4px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(233,217,214,0.6) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(84,11,14,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet);
+    margin-bottom: 28px; opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--dark); max-width: 820px;
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--garnet);
+    display: block;
+  }
+  .hero-divider {
+    width: 1px; height: 60px;
+    background: var(--garnet); margin: 36px auto;
+    opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+  }
+  .hero-sub {
+    font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+    color: var(--muted); max-width: 520px;
+    opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .hero-cta {
+    margin-top: 48px;
+    opacity: 0; animation: fadeUp 0.8s 1.1s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 48px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
+  .btn-ghost {
+    display: inline-block;
+    padding: 15px 48px;
+    background: transparent; color: var(--garnet);
+    font-family: 'Lato', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid var(--garnet); cursor: pointer;
+    transition: all 0.3s; margin-left: 16px;
+  }
+  .btn-ghost:hover { background: var(--garnet); color: var(--cream); }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet); margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.2; color: var(--dark);
+    max-width: 640px;
+  }
+  .section-title em { font-style: italic; color: var(--garnet); }
+
+  /* ── DOLOR ── */
+  .dolor {
+    background: var(--dark);
+    color: var(--cream);
+  }
+  .dolor-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .dolor .section-label { color: var(--pink); }
+  .dolor .section-title { color: var(--cream); max-width: 100%; }
+  .dolor .section-title em { color: var(--pink); }
+  .dolor-lista { margin-top: 40px; list-style: none; }
+  .dolor-lista li {
+    padding: 18px 0; border-bottom: 1px solid rgba(233,217,214,0.15);
+    font-size: 1rem; line-height: 1.7; color: rgba(249,247,246,0.75);
+    padding-left: 24px; position: relative;
+  }
+  .dolor-lista li::before {
+    content: '—'; position: absolute; left: 0; color: var(--pink);
+  }
+  .dolor-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); font-style: italic;
+    font-weight: 300; line-height: 1.4; color: var(--pink);
+    border-left: 2px solid var(--garnet); padding-left: 32px;
+  }
+
+  /* ── TRANSFORMACION ── */
+  .transicion {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .transicion-header {
+    text-align: center; margin-bottom: 80px;
+  }
+  .cards-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch;
+  }
+  .card-antes, .card-despues {
+    padding: 48px 40px;
+  }
+  .card-antes {
+    background: var(--pink);
+    border: 1px solid rgba(84,11,14,0.1);
+  }
+  .card-despues {
+    background: var(--garnet); color: var(--cream);
+  }
+  .card-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 32px; background: var(--cream);
+    border-top: 1px solid var(--pink); border-bottom: 1px solid var(--pink);
+  }
+  .card-arrow svg { width: 32px; color: var(--garnet); }
+  .card-tag {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .card-antes .card-tag { color: var(--garnet); }
+  .card-despues .card-tag { color: var(--pink); }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; line-height: 1.3; margin-bottom: 28px;
+  }
+  .card-antes .card-title { color: var(--dark); }
+  .card-despues .card-title { color: var(--cream); }
+  .feeling-list { list-style: none; }
+  .feeling-list li {
+    padding: 10px 0; border-bottom: 1px solid rgba(84,11,14,0.1);
+    font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative;
+  }
+  .card-despues .feeling-list li { border-bottom-color: rgba(249,247,246,0.15); color: rgba(249,247,246,0.85); }
+  .feeling-list li::before { content: '·'; position: absolute; left: 0; font-size: 1.4rem; line-height: 1.2; }
+  .card-antes .feeling-list li::before { color: var(--garnet); }
+  .card-despues .feeling-list li::before { color: var(--pink); }
+
+  /* ── FRASE CENTRAL ── */
+  .frase-central {
+    background: var(--garnet);
+    text-align: center; padding: 100px 48px;
+  }
+  .frase-central p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300; font-style: italic;
+    color: var(--cream); line-height: 1.4; max-width: 780px; margin: 0 auto;
+  }
+  .frase-central span {
+    font-style: normal; font-weight: 600;
+    display: block; margin-top: 8px;
+  }
+
+  /* ── SOLUCIÓN ── */
+  .solucion-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;
+  }
+  .solucion-texto { padding-top: 8px; }
+  .solucion-texto p {
+    font-size: 1rem; line-height: 1.85; color: var(--muted); margin-top: 24px;
+  }
+  .solucion-texto p strong { color: var(--text); font-weight: 700; }
+  .pilares { margin-top: 48px; list-style: none; }
+  .pilares li {
+    padding: 20px 0; border-bottom: 1px solid var(--pink);
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+  }
+  .pilar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300; color: var(--garnet);
+    padding-top: 2px;
+  }
+  .pilar-content strong {
+    display: block; font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.05em; margin-bottom: 4px; color: var(--dark);
+  }
+  .pilar-content span { font-size: 0.9rem; line-height: 1.6; color: var(--muted); }
+  .solucion-caja {
+    background: var(--pink); padding: 48px 40px;
+    border: 1px solid rgba(84,11,14,0.12);
+  }
+  .solucion-caja-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; line-height: 1.3; margin-bottom: 24px;
+    color: var(--dark);
+  }
+  .solucion-caja-title em { font-style: italic; color: var(--garnet); }
+  .solucion-caja p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 20px; }
+  .solucion-caja-tag {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--garnet); margin-bottom: 16px;
+  }
+
+  /* ── PARA QUIÉN ── */
+  .para-quien { background: var(--dark); color: var(--cream); }
+  .para-quien-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .para-quien .section-label { color: var(--pink); }
+  .para-quien .section-title { color: var(--cream); margin: 0 auto 60px; text-align: center; }
+  .para-quien .section-title em { color: var(--pink); }
+  .perfiles-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    margin-top: 60px;
+  }
+  .perfil {
+    background: rgba(249,247,246,0.04);
+    padding: 40px 32px; text-align: left;
+    border: 1px solid rgba(233,217,214,0.1);
+    transition: background 0.3s;
+  }
+  .perfil:hover { background: rgba(233,217,214,0.08); }
+  .perfil-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--pink); margin-bottom: 16px;
+  }
+  .perfil h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400; color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .perfil p { font-size: 0.9rem; line-height: 1.7; color: rgba(249,247,246,0.6); }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    text-align: center; padding: 120px 48px;
+    background: var(--cream);
+  }
+  .cta-final .section-label { text-align: center; margin-bottom: 24px; }
+  .cta-final h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.2; color: var(--dark);
+    max-width: 700px; margin: 0 auto 24px;
+  }
+  .cta-final h2 em { font-style: italic; color: var(--garnet); }
+  .cta-final p {
+    font-size: 1rem; line-height: 1.75; color: var(--muted);
+    max-width: 480px; margin: 0 auto 48px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); color: rgba(249,247,246,0.4);
+    text-align: center; padding: 40px 48px;
+    font-size: 0.75rem; letter-spacing: 0.15em;
+  }
+  footer span { color: var(--pink); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    section { padding: 72px 24px; }
+    .dolor-inner { grid-template-columns: 1fr; gap: 48px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .card-arrow { display: none; }
+    .solucion-inner { grid-template-columns: 1fr; gap: 48px; }
+    .perfiles-grid { grid-template-columns: 1fr; }
+    nav { padding: 20px 24px; }
+    .btn-ghost { margin-left: 0; margin-top: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">LARŌ <span>organic skin rituals</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Organic Skin Rituals</p>
+  <h1 class="hero-title">
+    Tu piel no necesita<br>más productos.
+    <em>Necesita mejores cuidados.</em>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    Aprende a cuidarte desde el conocimiento, no desde el miedo. Sin estándares de belleza que no te representan. Sin productos de más. Solo tú y tu piel.
+  </p>
+  <div class="hero-cta">
+    <a href="#solucion" class="btn-primary">Quiero saber más</a>
+    <a href="#transformacion" class="btn-ghost">¿Esto es para mí?</a>
+  </div>
+</section>
+
+<!-- DOLOR -->
+<section class="dolor">
+  <div class="dolor-inner">
+    <div class="reveal">
+      <p class="section-label">El problema real</p>
+      <h2 class="section-title">La industria lleva años diciéndote que <em>no eres suficiente.</em></h2>
+      <ul class="dolor-lista">
+        <li>Que si tienes arrugas, es un problema que resolver.</li>
+        <li>Que si tu piel no brilla, es porque no usas el sérum correcto.</li>
+        <li>Que envejecer es algo que se puede —y se debe— combatir.</li>
+        <li>Que necesitas doce pasos, cuatro marcas y gastarte una pasta cada mes.</li>
+        <li>Que si no te cuidas "bien", es tu culpa.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <p class="dolor-quote">
+        "Y al final acabas con el baño lleno de productos a medias, sin saber qué funciona de verdad, y sintiéndote culpable por no hacerlo mejor."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMACION -->
+<section id="transformacion" style="background: var(--cream);">
+  <div class="transicion">
+    <div class="transicion-header reveal">
+      <p class="section-label" style="text-align:center;">El antes y el después</p>
+      <h2 class="section-title" style="margin: 0 auto; text-align:center;">
+        ¿Te suena esto?
+      </h2>
+    </div>
+    <div class="cards-grid reveal">
+
+      <!-- ANTES -->
+      <div class="card-antes">
+        <p class="card-tag">Antes de LARŌ</p>
+        <p class="card-title">"Compro cosas porque me entran ganas, pero luego no las uso o no me funcionan…"</p>
+        <ul class="feeling-list">
+          <li>Abrumada con tanto producto y tanta información</li>
+          <li>Gastando dinero en cosas que no sabes si te van bien</li>
+          <li>Sintiéndote culpable si no tienes energía para tu rutina</li>
+          <li>Comparándote con estándares que no tienen nada que ver contigo</li>
+          <li>Sin entender qué necesita tu piel de verdad</li>
+          <li>Cuidarte se siente como otra tarea más en la lista</li>
+        </ul>
+      </div>
+
+      <!-- FLECHA -->
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- DESPUÉS -->
+      <div class="card-despues">
+        <p class="card-tag">Después de LARŌ</p>
+        <p class="card-title">"Por fin entiendo lo que necesita mi piel, y con mucho menos de lo que pensaba."</p>
+        <ul class="feeling-list">
+          <li>Claridad total: sabes qué usar, cuándo y por qué</li>
+          <li>Tu baño tiene lo que de verdad funciona para ti</li>
+          <li>Cuidarte se convierte en un rato tuyo, no en una obligación</li>
+          <li>Tu piel mejora, y lo notas sin mirar a nadie más</li>
+          <li>Te relacionas con tu piel desde el respeto, no desde la corrección</li>
+          <li>El cuidado se integra en tu vida real, con el tiempo que tienes</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FRASE CENTRAL -->
+<div class="frase-central">
+  <p>
+    "Cuidar tu piel no es una obligación ni algo excéntrico.
+    <span>Es un acto de amor."</span>
+  </p>
+</div>
+
+<!-- SOLUCIÓN -->
+<section id="solucion" style="background: var(--cream);">
+  <div class="solucion-inner">
+    <div class="solucion-texto reveal">
+      <p class="section-label">La solución</p>
+      <h2 class="section-title">Rituales de piel que <em>tienen sentido para tu vida.</em></h2>
+      <p>En LARŌ no te vendemos más cosas. Te enseñamos a entender tu piel desde la base, con criterio científico y sin el ruido de la industria.</p>
+      <p><strong>Porque cuando entiendes lo que hace cada ingrediente, lo que necesita tu piel según la temporada, tu estrés o tu ciclo,</strong> ya no necesitas que nadie te diga qué comprar.</p>
+      <ul class="pilares">
+        <li>
+          <span class="pilar-num">01</span>
+          <div class="pilar-content">
+            <strong>Conocimiento real</strong>
+            <span>Ingredientes activos, formulación, cómo leer una etiqueta. Sin tecnicismos innecesarios.</span>
+          </div>
+        </li>
+        <li>
+          <span class="pilar-num">02</span>
+          <div class="pilar-content">
+            <strong>Ritual, no rutina</strong>
+            <span>Un momento tuyo que se integra en tu día a día sin añadir presión.</span>
+          </div>
+        </li>
+        <li>
+          <span class="pilar-num">03</span>
+          <div class="pilar-content">
+            <strong>Tu piel, no la de nadie más</strong>
+            <span>Personalizado para cómo es tu piel de verdad, no la piel ideal de un anuncio.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="solucion-caja reveal">
+      <p class="solucion-caja-tag">Cursos y rituales LARŌ</p>
+      <h3 class="solucion-caja-title">Lo que aprendes cuando te apuntas <em>cambia cómo te ves.</em></h3>
+      <p>
+        Aprenderás a leer los ingredientes de lo que ya tienes en casa. A saber si te están funcionando o no. A construir una rutina mínima y efectiva. A cuidarte sin que se convierta en otra cosa que gestionar.
+      </p>
+      <p>
+        Y lo más importante: aprenderás a mirarte al espejo sin buscar lo que falta.
+      </p>
+      <a href="#cta" class="btn-primary" style="margin-top: 8px; display: inline-block;">Quiero empezar</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="para-quien">
+  <div class="para-quien-inner">
+    <p class="section-label">¿Esto es para ti?</p>
+    <h2 class="section-title">Si te reconoces en alguna de estas, <em>sí.</em></h2>
+    <div class="perfiles-grid reveal">
+      <div class="perfil">
+        <div class="perfil-icon">I.</div>
+        <h3>Tienes el baño lleno y no sabes qué usar</h3>
+        <p>Compras porque algo te llama la atención o porque lo viste en redes, pero al final no sabes si te funciona o no.</p>
+      </div>
+      <div class="perfil">
+        <div class="perfil-icon">II.</div>
+        <h3>Quieres cuidarte pero sin complicarte la vida</h3>
+        <p>Tienes trabajo, familia, mil cosas. No tienes tiempo para una rutina de veinte minutos que además no entiendes.</p>
+      </div>
+      <div class="perfil">
+        <div class="perfil-icon">III.</div>
+        <h3>Estás harta de la presión de parecer más joven</h3>
+        <p>No quieres "combatir" el tiempo. Quieres cuidarte porque te apetece, no porque la industria te diga que tienes que hacerlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="cta">
+  <p class="section-label">El primer paso</p>
+  <h2>Tu piel ya es <em>suficiente.</em><br>Aprende a cuidarla como se merece.</h2>
+  <p>Entra en la lista de espera de los cursos y rituales LARŌ. Serás la primera en saber cuándo empezamos.</p>
+  <a href="#" class="btn-primary">Apuntarme a la lista de espera</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>LARŌ — Organic Skin Rituals · <span>Tu piel, tu ritual.</span></p>
+</footer>
+
+<script>
+  // Scroll nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
