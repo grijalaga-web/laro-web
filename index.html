@@ -66,15 +66,40 @@
   }
   .nav-links a:hover { color: var(--garnet); }
 
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a::after { content: ' ▾'; font-size: 0.6rem; letter-spacing: 0; }
+  .dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 16px); left: 0;
+    background: var(--cream); border: 1px solid var(--pink);
+    min-width: 220px; padding: 8px 0; z-index: 200;
+  }
+  .nav-dropdown.active .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 24px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text);
+    text-decoration: none; transition: background 0.2s, color 0.2s;
+  }
+  .dropdown-menu a:hover { background: var(--pink); color: var(--garnet); }
+  .badge-pronto {
+    font-size: 0.58rem; font-weight: 400; letter-spacing: 0.08em;
+    color: var(--muted); text-transform: uppercase;
+    border: 1px solid var(--pink); padding: 2px 6px;
+    white-space: nowrap; margin-left: 12px;
+  }
+
   .nav-logo {
     text-decoration: none; display: flex; justify-content: center; align-items: center;
+    margin: 0 32px;
   }
   .nav-logo img {
     height: 160px; width: auto; display: block;
     mix-blend-mode: multiply;
   }
 
-  .nav-right { display: flex; justify-content: flex-end; }
+  .nav-right { display: flex; justify-content: flex-end; align-items: center; }
   .nav-cta {
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--garnet);
@@ -82,6 +107,79 @@
     border-bottom: 1px solid var(--garnet); padding-bottom: 2px;
   }
   .nav-cta:hover { color: var(--dark); border-bottom-color: var(--dark); }
+
+  /* Hamburger */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 1.5px;
+    background: var(--text); transition: all 0.3s;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--cream); flex-direction: column;
+    justify-content: center; align-items: center; gap: 8px;
+    padding: 48px 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.5rem; color: var(--text);
+  }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; color: var(--dark);
+    text-decoration: none; text-align: center; padding: 12px 0;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--garnet); }
+  .mobile-menu .mobile-divider {
+    width: 40px; height: 1px; background: var(--pink); margin: 16px 0;
+  }
+  .mobile-menu .mobile-pronto {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem; color: var(--muted); letter-spacing: 0.2em;
+    text-transform: uppercase; display: block; margin-top: -8px; margin-bottom: 8px;
+  }
+
+  /* Modal */
+  .modal {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(42,26,27,0.7); align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .modal.open { display: flex; }
+  .modal-inner {
+    background: var(--cream); max-width: 560px; width: 100%;
+    padding: 64px 56px; position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.4rem; color: var(--muted); line-height: 1;
+  }
+  .modal-close:hover { color: var(--garnet); }
+  .modal-badge {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--pink); padding: 4px 10px;
+    display: inline-block; margin-bottom: 24px;
+  }
+  .modal-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; line-height: 1.2;
+    color: var(--dark); margin-bottom: 20px;
+  }
+  .modal-inner h2 em { font-style: italic; color: var(--garnet); }
+  .modal-inner p {
+    font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin-bottom: 16px;
+  }
+  .modal-inner .btn-primary { margin-top: 8px; }
 
   /* ── HERO ── */
   .hero {
@@ -415,9 +513,12 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    nav { grid-template-columns: auto auto; }
+    nav { grid-template-columns: auto 1fr auto; padding: 16px 24px; }
     .nav-links { display: none; }
-    .nav-logo { text-align: left; }
+    .nav-right { display: none; }
+    .nav-logo { justify-content: center; }
+    .nav-logo img { height: 100px; }
+    .nav-hamburger { display: flex; }
   }
   @media (max-width: 768px) {
     section { padding: 72px 24px; }
@@ -429,8 +530,10 @@
     .presentacion-inner { grid-template-columns: 1fr; gap: 48px; }
     .presentacion-foto { position: static; }
     .valores-grid { grid-template-columns: 1fr; }
-    nav { padding: 20px 24px; }
     .btn-ghost { margin-left: 0; margin-top: 12px; }
+    .modal-inner { padding: 48px 24px; }
+    .modal { padding: 16px; align-items: flex-end; }
+    .modal-inner h2 { font-size: 1.8rem; }
   }
 </style>
 </head>
@@ -441,12 +544,75 @@
   <div class="nav-links">
     <a href="#presentacion">La historia</a>
     <a href="#valores">Los valores</a>
+    <div class="nav-dropdown" id="navDropdown">
+      <a href="#" onclick="toggleDropdown(event)">Rituales</a>
+      <div class="dropdown-menu">
+        <a href="#" onclick="openModal('asesoria')">Asesoría 1:1 <span class="badge-pronto">Próximamente</span></a>
+        <a href="#" onclick="openModal('curso')">Curso <span class="badge-pronto">Próximamente</span></a>
+        <a href="#" onclick="openModal('podcast')">Podcast <span class="badge-pronto">Próximamente</span></a>
+      </div>
+    </div>
   </div>
   <a href="#" class="nav-logo"><img src="laro.provisional.png" alt="LARŌ Organic Skin Rituals"></a>
   <div class="nav-right">
-    <a href="#cta" class="nav-cta">Únete</a>
+    <a href="#cta" class="nav-cta">Newsletter</a>
   </div>
+  <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="#presentacion" onclick="toggleMobileMenu()">La historia</a>
+  <a href="#valores" onclick="toggleMobileMenu()">Los valores</a>
+  <div class="mobile-divider"></div>
+  <a href="#" onclick="toggleMobileMenu();openModal('asesoria')">Asesoría 1:1</a>
+  <span class="mobile-pronto">Próximamente</span>
+  <a href="#" onclick="toggleMobileMenu();openModal('curso')">Curso</a>
+  <span class="mobile-pronto">Próximamente</span>
+  <a href="#" onclick="toggleMobileMenu();openModal('podcast')">Podcast</a>
+  <span class="mobile-pronto">Próximamente</span>
+  <div class="mobile-divider"></div>
+  <a href="#cta" onclick="toggleMobileMenu()">Newsletter</a>
+</div>
+
+<!-- MODAL ASESORÍA -->
+<div class="modal" id="modal-asesoria">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal('asesoria')">×</button>
+    <span class="modal-badge">Próximamente</span>
+    <h2>Asesoría <em>1:1</em></h2>
+    <p>Una sesión contigo y con Sarai. Analizamos tu piel, revisamos tus productos actuales y construimos juntas tu ritual personalizado.</p>
+    <p>Sin rutinas genéricas. Sin productos de más. Solo lo que necesita tu piel, explicado con criterio científico y adaptado a tu vida real.</p>
+    <a href="#cta" class="btn-primary" onclick="closeModal('asesoria')">Apuntarme a la lista de espera</a>
+  </div>
+</div>
+
+<!-- MODAL CURSO -->
+<div class="modal" id="modal-curso">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal('curso')">×</button>
+    <span class="modal-badge">Próximamente</span>
+    <h2>Curso <em>de piel</em></h2>
+    <p>Aprende a entender tu piel desde la base. Ingredientes, formulación, cómo leer un INCI, cómo construir una rutina que funcione para tu vida real.</p>
+    <p>Con base científica, sin tecnicismos innecesarios. Para que nunca más tengas que fiarte de lo que te dice un anuncio.</p>
+    <a href="#cta" class="btn-primary" onclick="closeModal('curso')">Apuntarme a la lista de espera</a>
+  </div>
+</div>
+
+<!-- MODAL PODCAST -->
+<div class="modal" id="modal-podcast">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal('podcast')">×</button>
+    <span class="modal-badge">Próximamente</span>
+    <h2>Podcast <em>en Substack</em></h2>
+    <p>Una serie de audios sobre lo que nadie te explica sobre tu piel. Episodios cortos, con rigor científico y sin rodeos.</p>
+    <p>Para escuchar mientras te cuidas, en el metro o cuando tengas diez minutos. Conocimiento real, en formato accesible.</p>
+    <a href="#cta" class="btn-primary" onclick="closeModal('podcast')">Apuntarme a la lista de espera</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -699,11 +865,13 @@
 </footer>
 
 <script>
+  // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
+  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -714,6 +882,37 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
+
+  // Dropdown
+  function toggleDropdown(e) {
+    e.preventDefault();
+    document.getElementById('navDropdown').classList.toggle('active');
+  }
+  document.addEventListener('click', (e) => {
+    const d = document.getElementById('navDropdown');
+    if (!d.contains(e.target)) d.classList.remove('active');
+  });
+
+  // Mobile menu
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+
+  // Modals
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', (e) => {
+      if (e.target === m) m.classList.remove('open'), document.body.style.overflow = '';
+    });
+  });
 </script>
 </body>
 </html>
