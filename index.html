@@ -67,13 +67,11 @@
   .nav-links a:hover { color: var(--garnet); }
 
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem; font-weight: 600; letter-spacing: 0.3em;
-    color: var(--garnet); text-decoration: none; text-align: center;
+    text-decoration: none; display: flex; justify-content: center; align-items: center;
   }
-  .nav-logo span {
-    font-weight: 300; letter-spacing: 0.05em; font-size: 0.65rem;
-    display: block; text-align: center; color: var(--muted); margin-top: -4px;
+  .nav-logo img {
+    height: 160px; width: auto; display: block;
+    mix-blend-mode: multiply;
   }
 
   .nav-right { display: flex; justify-content: flex-end; }
@@ -444,7 +442,7 @@
     <a href="#presentacion">La historia</a>
     <a href="#valores">Los valores</a>
   </div>
-  <a href="#" class="nav-logo">LARŌ <span>organic skin rituals</span></a>
+  <a href="#" class="nav-logo"><img src="laro.provisional.png" alt="LARŌ Organic Skin Rituals"></a>
   <div class="nav-right">
     <a href="#cta" class="nav-cta">Únete</a>
   </div>
@@ -452,7 +450,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">Organic Skin Rituals</p>
   <h1 class="hero-title">
     Tu piel no necesita<br>más productos.
     <em>Necesita mejores cuidados.</em>
