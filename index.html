@@ -550,6 +550,7 @@
         <a href="#" onclick="openModal('asesoria')">Asesoría 1:1 <span class="badge-pronto">Próximamente</span></a>
         <a href="#" onclick="openModal('curso')">Curso <span class="badge-pronto">Próximamente</span></a>
         <a href="#" onclick="openModal('podcast')">Podcast <span class="badge-pronto">Próximamente</span></a>
+        <a href="#" onclick="openModal('talleres')">Talleres presenciales <span class="badge-pronto">Próximamente</span></a>
       </div>
     </div>
   </div>
@@ -573,6 +574,8 @@
   <a href="#" onclick="toggleMobileMenu();openModal('curso')">Curso</a>
   <span class="mobile-pronto">Próximamente</span>
   <a href="#" onclick="toggleMobileMenu();openModal('podcast')">Podcast</a>
+  <span class="mobile-pronto">Próximamente</span>
+  <a href="#" onclick="toggleMobileMenu();openModal('talleres')">Talleres presenciales</a>
   <span class="mobile-pronto">Próximamente</span>
   <div class="mobile-divider"></div>
   <a href="#cta" onclick="toggleMobileMenu()">Newsletter</a>
@@ -611,6 +614,18 @@
     <p>Una serie de audios sobre lo que nadie te explica sobre tu piel. Episodios cortos, con rigor científico y sin rodeos.</p>
     <p>Para escuchar mientras te cuidas, en el metro o cuando tengas diez minutos. Conocimiento real, en formato accesible.</p>
     <a href="#cta" class="btn-primary" onclick="closeModal('podcast')">Apuntarme a la lista de espera</a>
+  </div>
+</div>
+
+<!-- MODAL TALLERES -->
+<div class="modal" id="modal-talleres">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal('talleres')">×</button>
+    <span class="modal-badge">Próximamente</span>
+    <h2>Talleres <em>presenciales</em></h2>
+    <p>Un espacio para aprender, tocarse la piel y entenderla de verdad. Sesiones en grupo con Sarai donde trabajamos los rituales, los ingredientes y la rutina personalizada de cada una.</p>
+    <p>Porque hay cosas que se aprenden mejor en persona, con las manos y con tiempo.</p>
+    <a href="#cta" class="btn-primary" onclick="closeModal('talleres')">Apuntarme a la lista de espera</a>
   </div>
 </div>
 
