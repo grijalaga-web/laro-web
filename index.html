@@ -186,19 +186,9 @@
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 60px;
-    padding: 140px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 200px 48px 80px;
     position: relative; overflow: hidden;
-  }
-  .hero-content { text-align: left; position: relative; z-index: 1; }
-  .hero-foto {
-    position: relative; z-index: 1;
-    height: 72vh; min-height: 520px; overflow: hidden;
-  }
-  .hero-foto img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center bottom;
   }
   .hero::before {
     content: '';
@@ -490,9 +480,16 @@
   }
 
   /* ── FOTO BANDA ── */
-  .foto-banda { height: 400px; overflow: hidden; }
-  .foto-banda img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-  .foto-banda--top img { object-position: center top; }
+  /* ratio 1640x2360 → altura al 100% ancho = 143.9vw
+     skip top 25% → start at 36vw; each band = 28vw → contiguous strips */
+  .foto-banda {
+    height: 28vw;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+  .foto-banda--t1 { background-image: url('detalle-flores.jpg'); background-position: center -36vw; }
+  .foto-banda--t2 { background-image: url('detalle-flores.jpg'); background-position: center -64vw; }
+  .foto-banda--t3 { background-image: url('detalle-flores.jpg'); background-position: center -92vw; }
 
   /* ── CTA FINAL ── */
   .cta-final { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; background: var(--cream); }
@@ -560,10 +557,10 @@
     .modal-inner { padding: 48px 24px; }
     .modal { padding: 16px; align-items: flex-end; }
     .modal-inner h2 { font-size: 1.8rem; }
-    .hero { grid-template-columns: 1fr; padding: 140px 24px 48px; }
-    .hero-foto { height: 50vh; min-height: 300px; }
-    .hero-content { text-align: center; }
-    .foto-banda { height: 260px; }
+    .foto-banda { height: 50vw; }
+    .foto-banda--t1 { background-position: center -50vw; }
+    .foto-banda--t2 { background-position: center -100vw; }
+    .foto-banda--t3 { background-position: center -150vw; }
     .cta-final { grid-template-columns: 1fr; }
     .cta-foto { min-height: 300px; }
     .cta-texto { padding: 72px 24px; }
@@ -664,22 +661,17 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">
-      Tu piel no necesita<br>más productos.
-      <em>Necesita mejores cuidados.</em>
-    </h1>
-    <div class="hero-divider"></div>
-    <p class="hero-sub">
-      Aprende a cuidarte desde el conocimiento, no desde el miedo. Sin estándares de belleza que no te representan. Sin productos de más. Solo tú y tu piel.
-    </p>
-    <div class="hero-cta">
-      <a href="#solucion" class="btn-primary">Quiero saber más</a>
-      <a href="#transformacion" class="btn-ghost">¿Esto es para mí?</a>
-    </div>
-  </div>
-  <div class="hero-foto reveal">
-    <img src="detalle-flores.jpg" alt="Flores silvestres sobre piedra">
+  <h1 class="hero-title">
+    Tu piel no necesita<br>más productos.
+    <em>Necesita mejores cuidados.</em>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    Aprende a cuidarte desde el conocimiento, no desde el miedo. Sin estándares de belleza que no te representan. Sin productos de más. Solo tú y tu piel.
+  </p>
+  <div class="hero-cta">
+    <a href="#solucion" class="btn-primary">Quiero saber más</a>
+    <a href="#transformacion" class="btn-ghost">¿Esto es para mí?</a>
   </div>
 </section>
 
@@ -750,11 +742,6 @@
   </div>
 </section>
 
-<!-- FOTO BANDA BLANCO -->
-<div class="foto-banda foto-banda--top">
-  <img src="sarai-blanco.jpg" alt="Sarai Orrego, fundadora de LARŌ">
-</div>
-
 <!-- FRASE CENTRAL -->
 <div class="frase-central">
   <p>
@@ -810,6 +797,9 @@
   </div>
 </section>
 
+<!-- FOTO BANDA T1 -->
+<div class="foto-banda foto-banda--t1"></div>
+
 <!-- PARA QUIÉN -->
 <section class="para-quien">
   <div class="para-quien-inner">
@@ -835,10 +825,9 @@
   </div>
 </section>
 
-<!-- FOTO BANDA -->
-<div class="foto-banda foto-banda--top">
-  <img src="sarai-flores.jpg" alt="Sarai Orrego">
-</div>
+
+<!-- FOTO BANDA T2 -->
+<div class="foto-banda foto-banda--t2"></div>
 
 <!-- PRESENTACIÓN -->
 <section id="presentacion" class="presentacion">
@@ -914,10 +903,8 @@
   </p>
 </div>
 
-<!-- FOTO BANDA FLORES -->
-<div class="foto-banda">
-  <img src="detalle-flores.jpg" alt="Flores silvestres sobre piedra">
-</div>
+<!-- FOTO BANDA T3 -->
+<div class="foto-banda foto-banda--t3"></div>
 
 <!-- CTA FINAL -->
 <section class="cta-final" id="cta">
