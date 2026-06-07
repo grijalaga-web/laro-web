@@ -181,6 +181,16 @@
     font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin-bottom: 16px;
   }
   .modal-inner .btn-primary { margin-top: 8px; }
+  .modal-foto {
+    margin: -64px -56px 36px;
+    height: 220px;
+    overflow: hidden;
+  }
+  .modal-foto img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+  }
 
   /* ── HERO ── */
   .hero {
@@ -617,6 +627,7 @@
 <div class="modal" id="modal-asesoria">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('asesoria')">×</button>
+    <div class="modal-foto"><img src="sarai-blanco.jpg" alt="Sarai Orrego"></div>
     <span class="modal-badge">Próximamente</span>
     <h2>Asesoría <em>1:1</em></h2>
     <p>Una sesión cara a cara con Sarai. Analizamos tu piel, revisamos tus productos actuales y construimos juntas tu ritual personalizado.</p>
@@ -629,6 +640,7 @@
 <div class="modal" id="modal-curso">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('curso')">×</button>
+    <div class="modal-foto"><img src="sarai-flores.jpg" alt="Sarai Orrego"></div>
     <span class="modal-badge">Próximamente</span>
     <h2>Curso <em>de piel</em></h2>
     <p>Aprende a entender tu piel desde la base. Ingredientes, cómo leer un INCI y cómo construir una rutina que funcione para tu vida real.</p>
@@ -641,6 +653,7 @@
 <div class="modal" id="modal-podcast">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('podcast')">×</button>
+    <div class="modal-foto"><img src="sarai-cta.jpg" alt="Sarai Orrego"></div>
     <span class="modal-badge">Próximamente</span>
     <h2><em>Podcast</em></h2>
     <p>Una serie de audios sobre lo que nadie te explica sobre tu piel. Episodios cortos, con rigor científico y sin rodeos.</p>
@@ -653,6 +666,7 @@
 <div class="modal" id="modal-talleres">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('talleres')">×</button>
+    <div class="modal-foto"><img src="detalle-flores.jpg" alt="Flores silvestres"></div>
     <span class="modal-badge">Próximamente</span>
     <h2>Talleres <em>presenciales</em></h2>
     <p>Un espacio para aprender, tocarse la piel y entenderla de verdad. Sesiones en grupo con Sarai donde trabajamos los rituales, los ingredientes y la rutina personalizada de cada una.</p>
