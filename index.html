@@ -515,6 +515,66 @@
     text-transform: uppercase;
   }
 
+
+  /* ── NEWSLETTER SECTION ── */
+  .newsletter-section {
+    background: var(--dark); color: var(--cream);
+    padding: 100px 48px; text-align: center;
+  }
+  .newsletter-section .section-label { color: var(--pink); }
+  .newsletter-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--cream); margin-bottom: 16px;
+  }
+  .newsletter-section h2 em { font-style: italic; color: var(--pink); }
+  .newsletter-section > p {
+    font-size: 1rem; line-height: 1.75;
+    color: rgba(249,247,246,0.6); max-width: 480px; margin: 0 auto 48px;
+  }
+  .newsletter-form {
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 440px; margin: 0 auto;
+  }
+  .newsletter-form input {
+    width: 100%; padding: 16px 20px;
+    background: rgba(249,247,246,0.08);
+    border: 1px solid rgba(233,217,214,0.25);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--cream); outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: rgba(249,247,246,0.35); }
+  .newsletter-form input:focus { border-color: var(--pink); }
+  .newsletter-form button {
+    padding: 16px; background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--pink); color: var(--dark); }
+  .newsletter-success {
+    display: none; color: var(--pink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; font-style: italic;
+    margin-top: 8px;
+  }
+  .newsletter-lista {
+    margin-top: 32px;
+    font-size: 0.78rem; letter-spacing: 0.1em;
+    color: rgba(249,247,246,0.35);
+  }
+  .newsletter-lista a {
+    color: rgba(233,217,214,0.6); text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .newsletter-lista a:hover { color: var(--pink); }
+  @media (max-width: 768px) {
+    .newsletter-section { padding: 72px 24px; }
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--dark); color: rgba(249,247,246,0.4);
@@ -586,7 +646,7 @@
   </div>
   <a href="#" class="nav-logo"><img src="narciso.laro.png" alt="LARŌ Organic Skin Rituals"></a>
   <div class="nav-right">
-    <a href="https://larorituals.substack.com" target="_blank" class="nav-cta">Newsletter</a>
+    <a href="#newsletter" class="nav-cta">Newsletter</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menú">
     <span></span><span></span><span></span>
@@ -608,7 +668,7 @@
   <a href="#" onclick="toggleMobileMenu();openModal('talleres')">Talleres presenciales</a>
   <span class="mobile-pronto">Próximamente</span>
   <div class="mobile-divider"></div>
-  <a href="https://larorituals.substack.com" target="_blank" onclick="toggleMobileMenu()">Newsletter</a>
+  <a href="#newsletter" onclick="toggleMobileMenu()">Newsletter</a>
 </div>
 
 <!-- MODAL ASESORÍA -->
@@ -839,13 +899,13 @@
     <div class="presentacion-texto reveal">
       <p class="section-label">La fundadora</p>
       <h2 class="section-title">Bioquímica. Bióloga molecular. Y alguien que lleva años leyendo lo que pone <em>detrás del bote.</em></h2>
-      <p>Soy Sarai Orrego. Tengo formación en bioquímica y biología molecular, y experiencia real en cosmética. Sé exactamente qué hace cada ingrediente en una fórmula, cómo actúa sobre la piel, qué le puedes pedir y qué no.</p>
+      <p>Soy Sarai Orrego. Estudié bioquímica y biología molecular, y tengo experiencia real en cosmética. Sé exactamente qué hace cada ingrediente en una fórmula, cómo actúa sobre la piel, qué le puedes pedir y qué no.</p>
       <p>Lo que para muchas personas es un código ininteligible en la parte de atrás del envase, para mí es información concreta. Y eso cambia completamente cómo te relacionas con lo que te pones en la cara.</p>
-      <p>LARŌ nació de ahí: de querer poner ese conocimiento al alcance de quien no tiene por qué haber estudiado lo que yo estudié. Porque <strong>entender lo que usas es el primer paso para dejar de comprar por impulso y empezar a cuidarte de verdad.</strong></p>
-      <p>Empiezo con cursos, material digital y herramientas prácticas. Lo que te ofrezco es conocimiento concreto: saber qué te estás poniendo, por qué, y si de verdad te funciona.</p>
+      <p>LARŌ nació de ahí: de simplificar las rutinas de quienes no entienden lo que yo sí. Porque <strong>entender lo que usas es el primer paso para dejar de comprar por impulso y empezar a cuidarte de verdad, y eso lo hago por ti.</strong></p>
+      <p>Empiezo con cursos, material digital y herramientas prácticas. Lo que te ofrezco es conocimiento concreto y simple, traducido para ti: saber qué te estás poniendo, por qué, y si de verdad te funciona.</p>
 
       <div class="presentacion-caja">
-        <blockquote>"LARŌ empezó cuando decidí tomar las riendas de mi vida, de mi maternidad, de lo que quería construir. Llevo años enamorada de la cosmética — he trabajado como asesora, como la persona que siempre tiene una rutina o un consejo para quien lo necesita. Quería dar un paso más: poner ese conocimiento y ese amor por los rituales y los productos que valen la pena al alcance de más mujeres."</blockquote>
+        <blockquote>"La maternidad me empujó a mirar la cosmética de otra manera. De repente necesitaba encontrar la forma de ritualizar en medio del huracán — con menos tiempo, menos energía, y más necesidad que nunca de ese rato para mí. Aprendí a hacerlo. Y ahora estoy aquí para enseñarlo."</blockquote>
         <span class="firma">Sarai Orrego · Fundadora de LARŌ</span>
       </div>
     </div>
@@ -918,6 +978,22 @@
   </div>
 </section>
 
+<!-- NEWSLETTER -->
+<section id="newsletter" class="newsletter-section reveal">
+  <p class="section-label">La Pausa</p>
+  <h2>Educación sobre piel que <em>vale la pena leer.</em></h2>
+  <p>Sin spam. Sin tendencias vacías. Solo lo que necesitas saber sobre tu piel, explicado con criterio científico.</p>
+  <form class="newsletter-form" id="newsletterForm">
+    <input type="text" name="nombre" placeholder="Tu nombre" required>
+    <input type="email" name="email" placeholder="Tu email" required>
+    <button type="submit">Suscribirme a La Pausa</button>
+  </form>
+  <p class="newsletter-success" id="newsletterSuccess">¡Ya estás dentro. Bienvenida a La Pausa.</p>
+  <p class="newsletter-lista">¿Quieres también estar en la lista de espera de los rituales?
+    <a href="/lista-de-espera">Apúntate aquí</a>
+  </p>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p>LARŌ · Organic Skin Rituals · <span>Tu piel, tu ritual.</span></p>
@@ -977,6 +1053,26 @@
       if (e.target === m) m.classList.remove('open'), document.body.style.overflow = '';
     });
   });
+
+  // Newsletter → Substack
+  const nlForm = document.getElementById('newsletterForm');
+  const nlSuccess = document.getElementById('newsletterSuccess');
+  if (nlForm) {
+    nlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = nlForm.querySelector('[name="email"]').value;
+      const nombre = nlForm.querySelector('[name="nombre"]').value;
+      try {
+        await fetch('https://larorituals.substack.com/api/v1/free', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, first_name: nombre })
+        });
+      } catch(err) {}
+      nlForm.style.display = 'none';
+      nlSuccess.style.display = 'block';
+    });
+  }
 </script>
 </body>
 </html>
