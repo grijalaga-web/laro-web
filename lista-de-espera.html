@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de espera · LARŌ Organic Skin Rituals</title>
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/png" href="laro-flower.png">
+<link rel="icon" type="image/png" href="imagenes/laro-flower.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -207,7 +207,7 @@
 
 <header>
   <a href="/">
-    <img src="narciso.laro.png" alt="LARŌ Organic Skin Rituals">
+    <img src="imagenes/narciso.laro.png" alt="LARŌ Organic Skin Rituals">
   </a>
 </header>
 
@@ -220,10 +220,10 @@
 
 <div class="form-wrap">
 
-  <!-- Netlify Forms: data-netlify="true" hace que Netlify capture las respuestas automáticamente -->
-  <form name="lista-de-espera" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="waitlistForm">
-    <input type="hidden" name="form-name" value="lista-de-espera">
-    <input type="hidden" name="bot-field" style="display:none">
+  <form id="waitlistForm">
+    <input type="hidden" name="_subject" value="Nueva inscripción · Lista de espera LARŌ">
+    <input type="hidden" name="_next" value="">
+    <input type="text" name="_gotcha" style="display:none">
 
     <!-- Nombre -->
     <div class="form-group">
@@ -373,16 +373,29 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+      if (data[key]) {
+        data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
+      } else {
+        data[key] = value;
+      }
+    });
     try {
-      await fetch('/', {
+      const res = await fetch('https://formspree.io/f/xzdqryyl', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString()
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
       });
-      form.style.display = 'none';
-      success.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const result = await res.json();
+      if (result.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
+      }
     } catch (err) {
       alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
     }
