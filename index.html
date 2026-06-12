@@ -983,12 +983,7 @@
   <p class="section-label">La Pausa</p>
   <h2>Educación sobre piel que <em>vale la pena leer.</em></h2>
   <p>Sin spam. Sin tendencias vacías. Solo lo que necesitas saber sobre tu piel, explicado con criterio científico.</p>
-  <form class="newsletter-form" id="newsletterForm">
-    <input type="text" name="nombre" placeholder="Tu nombre" required>
-    <input type="email" name="email" placeholder="Tu email" required>
-    <button type="submit">Suscribirme a La Pausa</button>
-  </form>
-  <p class="newsletter-success" id="newsletterSuccess">Ahora te abrimos Substack para confirmar tu suscripción. ¡Bienvenida!</p>
+  <iframe src="https://larorituals.substack.com/embed" width="100%" height="150" style="border:none; background:transparent; max-width:480px; display:block; margin:0 auto;" frameborder="0" scrolling="no"></iframe>
   <p class="newsletter-lista">¿Quieres también estar en la lista de espera de los rituales?
     <a href="/lista-de-espera">Apúntate aquí</a>
   </p>
@@ -1054,19 +1049,6 @@
     });
   });
 
-  // Newsletter → Substack
-  const nlForm = document.getElementById('newsletterForm');
-  const nlSuccess = document.getElementById('newsletterSuccess');
-  if (nlForm) {
-    nlForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      nlForm.style.display = 'none';
-      nlSuccess.style.display = 'block';
-      setTimeout(() => {
-        window.open('https://larorituals.substack.com', '_blank');
-      }, 800);
-    });
-  }
 </script>
 </body>
 </html>
