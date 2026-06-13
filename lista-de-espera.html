@@ -128,28 +128,6 @@
   }
   .options-list input:checked + span { color: var(--dark); font-weight: 400; }
 
-  /* Checkbox newsletter */
-  .newsletter-check {
-    background: var(--dark);
-    padding: 24px;
-    margin-bottom: 32px;
-  }
-  .newsletter-check label {
-    display: flex; align-items: flex-start; gap: 14px;
-    font-size: 0.92rem; font-weight: 300;
-    text-transform: none; letter-spacing: 0;
-    color: rgba(249,247,246,0.85);
-    cursor: pointer; padding: 0; border: none; background: none;
-  }
-  .newsletter-check label:hover { background: none; }
-  .newsletter-check input[type="checkbox"] {
-    width: 18px; min-width: 18px; height: 18px;
-    margin-top: 2px; padding: 0;
-    accent-color: var(--pink);
-    border-color: var(--pink);
-  }
-  .newsletter-check strong { color: var(--pink); }
-
   /* Submit */
   .btn-submit {
     width: 100%;
@@ -162,6 +140,15 @@
     transition: background 0.3s;
   }
   .btn-submit:hover { background: var(--dark); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Paso indicador */
+  .paso-indicator {
+    text-align: center;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 8px;
+  }
 
   /* Éxito */
   .success-msg {
@@ -211,155 +198,162 @@
   </a>
 </header>
 
-<div class="page-hero">
-  <span class="page-label">Lista de espera</span>
-  <h1 class="page-title">Antes de que lancemos,<br><em>quiero conocerte.</em></h1>
-  <p class="page-sub">Rellena esto y serás la primera en saber cuándo empezamos. Me ayuda a entender qué necesitas de verdad.</p>
-  <div class="divider"></div>
-</div>
-
-<div class="form-wrap">
-
-  <form id="waitlistForm">
-    <input type="hidden" name="_subject" value="Nueva inscripción · Lista de espera LARŌ">
-    <input type="hidden" name="_next" value="">
-    <input type="text" name="_gotcha" style="display:none">
-
-    <!-- Nombre -->
-    <div class="form-group">
-      <label for="nombre">¿Cómo te llamas?</label>
-      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">Tu email</label>
-      <input type="email" id="email" name="email" placeholder="hola@ejemplo.com" required>
-    </div>
-
-    <!-- Relación con el skincare -->
-    <div class="form-group">
-      <label>¿Cómo describirías tu relación con el cuidado de tu piel ahora mismo?</label>
-      <ul class="options-list">
-        <li>
-          <label>
-            <input type="radio" name="relacion_piel" value="Tengo el baño lleno y no sé qué me funciona de verdad" required>
-            <span>Tengo el baño lleno y no sé qué me funciona de verdad</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="relacion_piel" value="Me cuido pero sin mucho criterio, voy un poco a ciegas">
-            <span>Me cuido pero sin mucho criterio, voy un poco a ciegas</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="relacion_piel" value="Quiero empezar pero no sé por dónde">
-            <span>Quiero empezar pero no sé por dónde</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="relacion_piel" value="Me cuido bien pero quiero entenderlo mejor">
-            <span>Me cuido bien pero quiero entenderlo mejor</span>
-          </label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Intereses -->
-    <div class="form-group">
-      <label>¿Qué es lo que más te interesa de LARŌ? <span class="opcional">(puedes marcar varias)</span></label>
-      <ul class="options-list">
-        <li>
-          <label>
-            <input type="checkbox" name="intereses" value="Entender ingredientes y leer etiquetas">
-            <span>Entender los ingredientes y aprender a leer etiquetas</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="intereses" value="Construir una rutina personalizada">
-            <span>Construir una rutina personalizada para mi piel</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="intereses" value="Asesoría personalizada 1:1">
-            <span>Asesoría personalizada 1:1 con Sarai</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="intereses" value="Talleres presenciales">
-            <span>Talleres presenciales</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="intereses" value="Podcast y newsletter">
-            <span>El podcast y la newsletter</span>
-          </label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Presupuesto -->
-    <div class="form-group">
-      <label>¿Cuánto sueles gastar al mes en productos de piel?</label>
-      <ul class="options-list">
-        <li>
-          <label>
-            <input type="radio" name="presupuesto" value="Menos de 20€" required>
-            <span>Menos de 20€</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="presupuesto" value="Entre 20 y 50€">
-            <span>Entre 20 y 50€</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="presupuesto" value="Entre 50 y 100€">
-            <span>Entre 50 y 100€</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="radio" name="presupuesto" value="Más de 100€">
-            <span>Más de 100€</span>
-          </label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Texto libre -->
-    <div class="form-group">
-      <label for="mensaje">¿Hay algo que quieras contarme sobre tu piel o tu rutina? <span class="opcional">(opcional)</span></label>
-      <textarea id="mensaje" name="mensaje" placeholder="Cuéntame lo que quieras..."></textarea>
-    </div>
-
-    <!-- Newsletter (obligatorio) -->
-    <div class="newsletter-check">
-      <label>
-        <input type="checkbox" name="newsletter" value="sí" required>
-        <span>Quiero apuntarme a <strong>La Pausa</strong>, la newsletter de LARŌ, y recibir contenido sobre skincare con criterio científico. Sin spam, solo lo que vale la pena.</span>
-      </label>
-    </div>
-
-    <button type="submit" class="btn-submit">Apuntarme a la lista de espera</button>
-  </form>
-
-  <!-- Mensaje de éxito (se muestra tras enviar) -->
-  <div class="success-msg" id="successMsg">
-    <h2>¡Ya estás<br><em>en la lista!</em></h2>
-    <p>Gracias por contarme sobre ti. Serás la primera en saber cuándo empezamos — y recibirás La Pausa en tu email.</p>
-    <a href="/" style="margin-top:8px;">Volver a LARŌ</a>
+<!-- ── PASO 1: SUSCRIPCIÓN ── -->
+<div id="paso1">
+  <div class="page-hero">
+    <span class="paso-indicator">Paso 1 de 2</span>
+    <span class="page-label">Lista de espera</span>
+    <h1 class="page-title">Antes de que lancemos,<br><em>quiero conocerte.</em></h1>
+    <p class="page-sub">Empieza por aquí: únete a <strong>La Pausa</strong>, la newsletter de LARŌ, y serás la primera en saber cuándo empezamos.</p>
+    <div class="divider"></div>
   </div>
 
+  <div class="form-wrap">
+    <form id="form1">
+      <div class="form-group">
+        <label for="nombre1">¿Cómo te llamas?</label>
+        <input type="text" id="nombre1" name="nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="email1">Tu email</label>
+        <input type="email" id="email1" name="email" placeholder="hola@ejemplo.com" required>
+      </div>
+      <button type="submit" class="btn-submit" id="btn1">Suscribirme y continuar →</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── PASO 2: CUESTIONARIO ── -->
+<div id="paso2" style="display:none">
+  <div class="page-hero">
+    <span class="paso-indicator">Paso 2 de 2</span>
+    <span class="page-label">Cuéntame más</span>
+    <h1 class="page-title">Ayúdame a entender<br><em>qué necesitas.</em></h1>
+    <p class="page-sub">Dos minutos. Me sirve para ofrecerte algo que de verdad te funcione.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="form-wrap">
+    <form id="form2">
+      <input type="hidden" name="email" id="emailHidden">
+      <input type="hidden" name="nombre" id="nombreHidden">
+      <input type="hidden" name="_subject" value="Nueva inscripción · Lista de espera LARŌ">
+
+      <!-- Relación con el skincare -->
+      <div class="form-group">
+        <label>¿Cómo describirías tu relación con el cuidado de tu piel ahora mismo?</label>
+        <ul class="options-list">
+          <li>
+            <label>
+              <input type="radio" name="relacion_piel" value="Tengo el baño lleno y no sé qué me funciona de verdad" required>
+              <span>Tengo el baño lleno y no sé qué me funciona de verdad</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="relacion_piel" value="Me cuido pero sin mucho criterio, voy un poco a ciegas">
+              <span>Me cuido pero sin mucho criterio, voy un poco a ciegas</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="relacion_piel" value="Quiero empezar pero no sé por dónde">
+              <span>Quiero empezar pero no sé por dónde</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="relacion_piel" value="Me cuido bien pero quiero entenderlo mejor">
+              <span>Me cuido bien pero quiero entenderlo mejor</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Intereses -->
+      <div class="form-group">
+        <label>¿Qué es lo que más te interesa de LARŌ? <span class="opcional">(puedes marcar varias)</span></label>
+        <ul class="options-list">
+          <li>
+            <label>
+              <input type="checkbox" name="intereses" value="Entender ingredientes y leer etiquetas">
+              <span>Entender los ingredientes y aprender a leer etiquetas</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="intereses" value="Construir una rutina personalizada">
+              <span>Construir una rutina personalizada para mi piel</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="intereses" value="Asesoría personalizada 1:1">
+              <span>Asesoría personalizada 1:1 con Sarai</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="intereses" value="Talleres presenciales">
+              <span>Talleres presenciales</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="intereses" value="Podcast y newsletter">
+              <span>El podcast y la newsletter</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Presupuesto -->
+      <div class="form-group">
+        <label>¿Cuánto sueles gastar al mes en productos de piel?</label>
+        <ul class="options-list">
+          <li>
+            <label>
+              <input type="radio" name="presupuesto" value="Menos de 20€" required>
+              <span>Menos de 20€</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="presupuesto" value="Entre 20 y 50€">
+              <span>Entre 20 y 50€</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="presupuesto" value="Entre 50 y 100€">
+              <span>Entre 50 y 100€</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="presupuesto" value="Más de 100€">
+              <span>Más de 100€</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Texto libre -->
+      <div class="form-group">
+        <label for="mensaje">¿Hay algo que quieras contarme sobre tu piel o tu rutina? <span class="opcional">(opcional)</span></label>
+        <textarea id="mensaje" name="mensaje" placeholder="Cuéntame lo que quieras..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── ÉXITO ── -->
+<div class="success-msg" id="successMsg">
+  <h2>¡Ya estás<br><em>en la lista!</em></h2>
+  <p>Gracias por contarme sobre ti. Serás la primera en saber cuándo empezamos — y recibirás La Pausa en tu email.</p>
+  <a href="/">Volver a LARŌ</a>
 </div>
 
 <footer>
@@ -367,12 +361,48 @@
 </footer>
 
 <script>
-  const form = document.getElementById('waitlistForm');
-  const success = document.getElementById('successMsg');
+  const paso1 = document.getElementById('paso1');
+  const paso2 = document.getElementById('paso2');
+  const successMsg = document.getElementById('successMsg');
 
-  form.addEventListener('submit', async (e) => {
+  // ── PASO 1: suscribir a Kit ──
+  document.getElementById('form1').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
+    const btn = document.getElementById('btn1');
+    btn.disabled = true;
+    btn.textContent = 'Un momento...';
+
+    const fd = new FormData(e.target);
+    const email = fd.get('email');
+    const nombre = fd.get('nombre');
+
+    try {
+      const kitData = new FormData();
+      kitData.append('email_address', email);
+      kitData.append('fields[first_name]', nombre);
+      await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
+        method: 'POST',
+        body: kitData,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (_) {}
+
+    document.getElementById('emailHidden').value = email;
+    document.getElementById('nombreHidden').value = nombre;
+
+    paso1.style.display = 'none';
+    paso2.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── PASO 2: enviar cuestionario a Formspree ──
+  document.getElementById('form2').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const formData = new FormData(e.target);
     const data = {};
     formData.forEach((value, key) => {
       if (data[key]) {
@@ -381,6 +411,7 @@
         data[key] = value;
       }
     });
+
     try {
       const res = await fetch('https://formspree.io/f/xzdqryyl', {
         method: 'POST',
@@ -389,23 +420,17 @@
       });
       const result = await res.json();
       if (result.ok) {
-        try {
-          const kitData = new FormData();
-          kitData.append('email_address', data.email);
-          if (data.nombre) kitData.append('fields[first_name]', data.nombre);
-          await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
-            method: 'POST',
-            body: kitData,
-            headers: { 'Accept': 'application/json' }
-          });
-        } catch (_) {}
-        form.style.display = 'none';
-        success.style.display = 'block';
+        paso2.style.display = 'none';
+        successMsg.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
+        btn.disabled = false;
+        btn.textContent = 'Enviar';
         alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
       }
     } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
       alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
     }
   });
