@@ -356,9 +356,8 @@
   <!-- Mensaje de éxito (se muestra tras enviar) -->
   <div class="success-msg" id="successMsg">
     <h2>¡Ya estás<br><em>en la lista!</em></h2>
-    <p>Gracias por contarme sobre ti. Serás la primera en saber cuándo empezamos.</p>
-    <p>Mientras tanto, apúntate a <strong>La Pausa</strong> para no perderte nada.</p>
-    <a href="https://larorituals.substack.com" target="_blank">Ir a La Pausa</a>
+    <p>Gracias por contarme sobre ti. Serás la primera en saber cuándo empezamos — y recibirás La Pausa en tu email.</p>
+    <a href="/" style="margin-top:8px;">Volver a LARŌ</a>
   </div>
 
 </div>
@@ -390,6 +389,16 @@
       });
       const result = await res.json();
       if (result.ok) {
+        try {
+          const kitData = new FormData();
+          kitData.append('email_address', data.email);
+          if (data.nombre) kitData.append('fields[first_name]', data.nombre);
+          await fetch('https://app.kit.com/forms/9558956/subscriptions', {
+            method: 'POST',
+            body: kitData,
+            headers: { 'Accept': 'application/json' }
+          });
+        } catch (_) {}
         form.style.display = 'none';
         success.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });

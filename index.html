@@ -983,7 +983,12 @@
   <p class="section-label">La Pausa</p>
   <h2>Educación sobre piel que <em>vale la pena leer.</em></h2>
   <p>Ingredientes que funcionan, rituales que encajan en tu vida real y la ciencia detrás de lo que te pones en la piel — explicado por alguien que lo ha estudiado de verdad.</p>
-  <a href="https://larorituals.substack.com" target="_blank" class="btn-primary" style="display:inline-block; margin-top:8px;">Suscribirme</a>
+  <form class="newsletter-form" id="newsletterForm">
+    <input type="text" name="nombre" placeholder="Tu nombre" required>
+    <input type="email" name="email" placeholder="Tu email" required>
+    <button type="submit">Suscribirme</button>
+  </form>
+  <p class="newsletter-success" id="newsletterSuccess">Ya estás dentro. Bienvenida a La Pausa.</p>
   <p class="newsletter-lista">¿Quieres también estar en la lista de espera de los rituales?
     <a href="/lista-de-espera">Apúntate aquí</a>
   </p>
@@ -1048,6 +1053,28 @@
       if (e.target === m) m.classList.remove('open'), document.body.style.overflow = '';
     });
   });
+
+  // Newsletter → Kit
+  const nlForm = document.getElementById('newsletterForm');
+  const nlSuccess = document.getElementById('newsletterSuccess');
+  if (nlForm) {
+    nlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(nlForm);
+      const kitData = new FormData();
+      kitData.append('email_address', fd.get('email'));
+      kitData.append('fields[first_name]', fd.get('nombre'));
+      try {
+        await fetch('https://app.kit.com/forms/9558956/subscriptions', {
+          method: 'POST',
+          body: kitData,
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch (_) {}
+      nlForm.style.display = 'none';
+      nlSuccess.style.display = 'block';
+    });
+  }
 
 </script>
 </body>
