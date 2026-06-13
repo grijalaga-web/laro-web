@@ -1065,7 +1065,7 @@
       kitData.append('email_address', fd.get('email'));
       kitData.append('fields[first_name]', fd.get('nombre'));
       try {
-        await fetch('https://app.kit.com/forms/9558956/subscriptions', {
+        await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
           method: 'POST',
           body: kitData,
           headers: { 'Accept': 'application/json' }

@@ -393,7 +393,7 @@
           const kitData = new FormData();
           kitData.append('email_address', data.email);
           if (data.nombre) kitData.append('fields[first_name]', data.nombre);
-          await fetch('https://app.kit.com/forms/9558956/subscriptions', {
+          await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
             method: 'POST',
             body: kitData,
             headers: { 'Accept': 'application/json' }
