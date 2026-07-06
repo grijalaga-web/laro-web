@@ -707,11 +707,20 @@
     btn.disabled = true;
     btn.textContent = 'Un momento...';
 
-    // Kit subscription
+    // Calcular resultado antes de enviar
+    let resultId;
+    if (totalScore <= 4) resultId = 'resultSana';
+    else if (totalScore <= 8) resultId = 'resultSensibilizada';
+    else resultId = 'resultComprometida';
+
+    const resultadoValor = resultId === 'resultSana' ? 'sana' : resultId === 'resultSensibilizada' ? 'sensibilizada' : 'comprometida';
+
+    // Kit subscription + campo barrera_cutanea
     try {
       const kitData = new FormData();
       kitData.append('email_address', email);
       kitData.append('fields[first_name]', nombre);
+      kitData.append('fields[barrera_cutanea]', resultadoValor);
       await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
         method: 'POST', body: kitData, headers: { 'Accept': 'application/json' }
       });
@@ -719,11 +728,6 @@
 
     // Show result
     document.getElementById('captureBlock').classList.remove('active');
-
-    let resultId;
-    if (totalScore <= 4) resultId = 'resultSana';
-    else if (totalScore <= 8) resultId = 'resultSensibilizada';
-    else resultId = 'resultComprometida';
 
     // Personalize with name
     const block = document.getElementById(resultId);

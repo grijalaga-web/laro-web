@@ -198,13 +198,12 @@
   </a>
 </header>
 
-<!-- ── PASO 1: SUSCRIPCIÓN ── -->
+<!-- ── SUSCRIPCIÓN ── -->
 <div id="paso1">
   <div class="page-hero">
-    <span class="paso-indicator">Paso 1 de 2</span>
     <span class="page-label">Lista de espera</span>
-    <h1 class="page-title">Antes de que lancemos,<br><em>quiero conocerte.</em></h1>
-    <p class="page-sub">Empieza por aquí: únete a <strong>La Pausa</strong>, la newsletter de LARŌ, y serás la primera en saber cuándo empezamos.</p>
+    <h1 class="page-title">Sé la primera<br><em>en saberlo.</em></h1>
+    <p class="page-sub">Únete a <strong>La Pausa</strong>, la newsletter de LARŌ, y serás la primera en saber cuándo empezamos.</p>
     <div class="divider"></div>
   </div>
 
@@ -218,26 +217,12 @@
         <label for="email1">Tu email</label>
         <input type="email" id="email1" name="email" placeholder="hola@ejemplo.com" required>
       </div>
-      <button type="submit" class="btn-submit" id="btn1">Suscribirme y continuar →</button>
+      <button type="submit" class="btn-submit" id="btn1">Apuntarme →</button>
     </form>
   </div>
 </div>
 
-<!-- ── PASO 2: CUESTIONARIO ── -->
-<div id="paso2" style="display:none">
-  <div class="page-hero">
-    <span class="paso-indicator">Paso 2 de 2</span>
-    <span class="page-label">Cuéntame más</span>
-    <h1 class="page-title">Ayúdame a entender<br><em>qué necesitas.</em></h1>
-    <p class="page-sub">Dos minutos. Me sirve para ofrecerte algo que de verdad te funcione.</p>
-    <div class="divider"></div>
-  </div>
-
-  <div class="form-wrap">
-    <form id="form2">
-      <input type="hidden" name="email" id="emailHidden">
-      <input type="hidden" name="nombre" id="nombreHidden">
-      <input type="hidden" name="_subject" value="Nueva inscripción · Lista de espera LARŌ">
+<!-- eliminado paso 2 / formspree -->
 
       <!-- Relación con el skincare -->
       <div class="form-group">
@@ -362,10 +347,8 @@
 
 <script>
   const paso1 = document.getElementById('paso1');
-  const paso2 = document.getElementById('paso2');
   const successMsg = document.getElementById('successMsg');
 
-  // ── PASO 1: suscribir a Kit ──
   document.getElementById('form1').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('btn1');
@@ -373,13 +356,10 @@
     btn.textContent = 'Un momento...';
 
     const fd = new FormData(e.target);
-    const email = fd.get('email');
-    const nombre = fd.get('nombre');
-
     try {
       const kitData = new FormData();
-      kitData.append('email_address', email);
-      kitData.append('fields[first_name]', nombre);
+      kitData.append('email_address', fd.get('email'));
+      kitData.append('fields[first_name]', fd.get('nombre'));
       await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
         method: 'POST',
         body: kitData,
@@ -387,52 +367,9 @@
       });
     } catch (_) {}
 
-    document.getElementById('emailHidden').value = email;
-    document.getElementById('nombreHidden').value = nombre;
-
     paso1.style.display = 'none';
-    paso2.style.display = 'block';
+    successMsg.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // ── PASO 2: enviar cuestionario a Formspree ──
-  document.getElementById('form2').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
-
-    const formData = new FormData(e.target);
-    const data = {};
-    formData.forEach((value, key) => {
-      if (data[key]) {
-        data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
-      } else {
-        data[key] = value;
-      }
-    });
-
-    try {
-      const res = await fetch('https://formspree.io/f/xzdqryyl', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      if (result.ok) {
-        paso2.style.display = 'none';
-        successMsg.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        btn.disabled = false;
-        btn.textContent = 'Enviar';
-        alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
-      }
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = 'Enviar';
-      alert('Algo ha ido mal. Inténtalo de nuevo o escríbeme a hola@larō.com');
-    }
   });
 </script>
 </body>
