@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de barrera cutánea · LARŌ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    background: #F9F7F6;
+    color: #2a1a1b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    padding: 28px 40px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #E9D9D6;
+    background: #F9F7F6;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: #540B0E;
+    text-decoration: none;
+  }
+
+  .logo span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b07070;
+    font-family: 'Lato', sans-serif;
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 620px;
+    padding: 40px 24px 80px;
+  }
+
+  /* Intro */
+  .intro {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .intro-tag {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b07070;
+    margin-bottom: 16px;
+  }
+
+  .intro h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: #540B0E;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .intro p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+    max-width: 480px;
+    margin: 0 auto 28px;
+  }
+
+  .btn-start {
+    display: inline-block;
+    background: #540B0E;
+    color: #F9F7F6;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-start:hover { background: #3d0809; }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 40px;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #b07070;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar {
+    height: 2px;
+    background: #E9D9D6;
+    border-radius: 2px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #540B0E;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Question */
+  .question-block {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .question-block.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-num {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b07070;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #2a1a1b;
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    border: 1px solid #E9D9D6;
+    border-radius: 2px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    background: white;
+    text-align: left;
+  }
+
+  .option:hover {
+    border-color: #540B0E;
+    color: #540B0E;
+    background: #fdf9f8;
+  }
+
+  .option.selected {
+    border-color: #540B0E;
+    background: #540B0E;
+    color: #F9F7F6;
+  }
+
+  .btn-next {
+    margin-top: 28px;
+    display: none;
+    width: 100%;
+    background: #540B0E;
+    color: #F9F7F6;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-next:hover { background: #3d0809; }
+  .btn-next.visible { display: block; }
+
+  /* Capture form */
+  .capture-block {
+    display: none;
+    animation: fadeIn 0.3s ease;
+    text-align: center;
+  }
+
+  .capture-block.active { display: block; }
+
+  .capture-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #540B0E;
+    margin-bottom: 12px;
+  }
+
+  .capture-block p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .form-field {
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b07070;
+    margin-bottom: 6px;
+  }
+
+  .form-field input {
+    width: 100%;
+    border: 1px solid #E9D9D6;
+    border-radius: 2px;
+    padding: 13px 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #2a1a1b;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-field input:focus { border-color: #540B0E; }
+
+  .btn-reveal {
+    width: 100%;
+    background: #540B0E;
+    color: #F9F7F6;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .btn-reveal:hover { background: #3d0809; }
+  .btn-reveal:disabled { background: #c9a0a0; cursor: not-allowed; }
+
+  .privacy-note {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* Results */
+  .result-block {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .result-block.active { display: block; }
+
+  .result-tag {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b07070;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #540B0E;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .result-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: #b07070;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .result-divider {
+    width: 40px;
+    height: 1px;
+    background: #540B0E;
+    margin: 0 auto 32px;
+  }
+
+  .result-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 24px;
+  }
+
+  .result-body strong { color: #2a1a1b; font-weight: 700; }
+
+  .result-tips {
+    background: white;
+    border: 1px solid #E9D9D6;
+    border-left: 3px solid #540B0E;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+
+  .result-tips h4 {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #540B0E;
+    margin-bottom: 12px;
+  }
+
+  .result-tips ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .result-tips ul li {
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .result-tips ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: #540B0E;
+  }
+
+  .result-cta {
+    background: #F9F7F6;
+    border: 1px solid #E9D9D6;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .result-cta h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: #540B0E;
+    margin-bottom: 8px;
+  }
+
+  .result-cta p {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    border: 1px solid #540B0E;
+    color: #540B0E;
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin: 4px;
+    background: white;
+  }
+
+  .btn-cta:hover, .btn-cta.primary {
+    background: #540B0E;
+    color: #F9F7F6;
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 11px;
+    color: #ccc;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 480px) {
+    .intro h1 { font-size: 28px; }
+    .question-text { font-size: 22px; }
+    .result-title { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">LARŌ <span>Organic Skin Rituals</span></a>
+</header>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="intro" id="introBlock">
+    <div class="intro-tag">Test gratuito · 2 minutos</div>
+    <h1>¿Cómo está tu barrera cutánea?</h1>
+    <p>Tu barrera cutánea es la primera línea de defensa de tu piel. Cuando está fuerte, todo funciona. Cuando está comprometida, nada funciona del todo bien. Descubre en qué punto está la tuya.</p>
+    <button class="btn-start" onclick="startTest()">Empezar el test</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-info">
+      <span id="progressLabel">Pregunta 1 de 7</span>
+      <span id="progressPct">14%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:14%"></div>
+    </div>
+  </div>
+
+  <!-- PREGUNTAS -->
+
+  <div class="question-block" id="q1">
+    <div class="question-num">Pregunta 1 · Tu piel en el día a día</div>
+    <div class="question-text">¿Cómo describirías tu piel a lo largo del día?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">Equilibrada la mayor parte del día, sin extremos</button>
+      <button class="option" onclick="selectOption(this, 1)">Tirante en algunas zonas y brillante en otras</button>
+      <button class="option" onclick="selectOption(this, 2)">Muy seca y tirante, o muy grasa y reactiva con facilidad</button>
+    </div>
+    <button class="btn-next" id="next1" onclick="nextQuestion(1)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q2">
+    <div class="question-num">Pregunta 2 · Reactividad</div>
+    <div class="question-text">¿Con qué frecuencia tu piel reacciona a productos: picor, ardor o rojez?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">Casi nunca, tolera bien la mayoría de los productos</button>
+      <button class="option" onclick="selectOption(this, 1)">A veces, con ciertos ingredientes o productos nuevos</button>
+      <button class="option" onclick="selectOption(this, 2)">Con frecuencia, incluso con productos suaves o básicos</button>
+    </div>
+    <button class="btn-next" id="next2" onclick="nextQuestion(2)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q3">
+    <div class="question-num">Pregunta 3 · Por la mañana</div>
+    <div class="question-text">¿Cómo está tu piel cuando te levantas?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">Fresca y equilibrada, lista para empezar</button>
+      <button class="option" onclick="selectOption(this, 1)">Algo tirante o con alguna zona apagada o irregular</button>
+      <button class="option" onclick="selectOption(this, 2)">Tirante, irritada o con rojeces desde el principio</button>
+    </div>
+    <button class="btn-next" id="next3" onclick="nextQuestion(3)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q4">
+    <div class="question-num">Pregunta 4 · Estrés y piel</div>
+    <div class="question-text">En épocas de más estrés, ¿qué le pasa a tu piel?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">Prácticamente nada, se mantiene bastante estable</button>
+      <button class="option" onclick="selectOption(this, 1)">Aparece algún grano o está algo más sensible de lo normal</button>
+      <button class="option" onclick="selectOption(this, 2)">Se descontrola claramente: brotes, rojeces o tirantez marcada</button>
+    </div>
+    <button class="btn-next" id="next4" onclick="nextQuestion(4)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q5">
+    <div class="question-num">Pregunta 5 · Entorno</div>
+    <div class="question-text">¿Cómo reacciona tu piel a los cambios de temperatura, el viento o el aire acondicionado?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">Sin problemas, no se resiente</button>
+      <button class="option" onclick="selectOption(this, 1)">Se resiente un poco: algo de sequedad o sensación extraña</button>
+      <button class="option" onclick="selectOption(this, 2)">Se irrita, enrojece o reseca bastante ante esos cambios</button>
+    </div>
+    <button class="btn-next" id="next5" onclick="nextQuestion(5)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q6">
+    <div class="question-num">Pregunta 6 · Limpieza</div>
+    <div class="question-text">¿Notas tirantez o incomodidad justo después de limpiarte la cara?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 0)">No, me siento bien justo después de limpiarme</button>
+      <button class="option" onclick="selectOption(this, 1)">A veces, algo de tirantez que se pasa pronto</button>
+      <button class="option" onclick="selectOption(this, 2)">Casi siempre noto tirantez o incomodidad al limpiarme</button>
+    </div>
+    <button class="btn-next" id="next6" onclick="nextQuestion(6)">Siguiente →</button>
+  </div>
+
+  <div class="question-block" id="q7">
+    <div class="question-num">Pregunta 7 · Tu rutina</div>
+    <div class="question-text">¿Tienes rutina facial? Si es así, ¿cuántos pasos tiene?</div>
+    <div class="options">
+      <button class="option" onclick="selectOption(this, 1)">No tengo rutina definida</button>
+      <button class="option" onclick="selectOption(this, 0)">Sí, sencilla: limpieza e hidratación (1–2 pasos)</button>
+      <button class="option" onclick="selectOption(this, 0)">Sí, varios pasos: entre 3 y 5</button>
+      <button class="option" onclick="selectOption(this, 1)">Sí, bastante completa: más de 5 pasos</button>
+    </div>
+    <button class="btn-next" id="next7" onclick="showCapture()">Ver mi resultado →</button>
+  </div>
+
+  <!-- CAPTURA -->
+  <div class="capture-block" id="captureBlock">
+    <h2>Tu resultado está listo.</h2>
+    <p>Deja tu nombre y tu email para verlo. Te lo enviamos también a tu bandeja de entrada.</p>
+    <div class="form-field">
+      <label>Tu nombre</label>
+      <input type="text" id="capNombre" placeholder="Cómo quieres que te llame" required>
+    </div>
+    <div class="form-field">
+      <label>Tu email</label>
+      <input type="email" id="capEmail" placeholder="tu@email.com" required>
+    </div>
+    <button class="btn-reveal" id="btnReveal" onclick="revealResult()">Ver mi resultado</button>
+    <p class="privacy-note">Sin spam. Recibirás La Pausa, mi newsletter quincenal sobre piel y ciencia.<br>Te puedes dar de baja cuando quieras.</p>
+  </div>
+
+  <!-- RESULTADO 1: SANA -->
+  <div class="result-block" id="resultSana">
+    <div class="result-tag">Tu resultado</div>
+    <div class="result-title">Barrera sana</div>
+    <div class="result-subtitle">Tu piel sabe cuidarse</div>
+    <div class="result-divider"></div>
+    <div class="result-body">
+      <p>Tu barrera cutánea está haciendo bien su trabajo. <strong>Retiene la hidratación, filtra los agresores externos y mantiene el equilibrio.</strong> No reacciona de forma exagerada, tolera bien los cambios del entorno y se recupera con facilidad.</p>
+      <br>
+      <p>Esto no significa que no necesite cuidados — significa que los cuidados que le des deben <strong>mantener y reforzar lo que ya funciona</strong>, sin sobrecargarla ni complicarla. Menos, aquí, es más.</p>
+    </div>
+    <div class="result-tips">
+      <h4>Qué le viene bien a tu piel ahora mismo</h4>
+      <ul>
+        <li>Una rutina sencilla: limpieza suave + tonificar/hidratación + protección solar, sobre todo en las horas centrales de sol (índice UV ≥3)</li>
+        <li>Ingredientes que refuercen sin saturar</li>
+        <li>No añadir activos agresivos sin necesidad solo porque están de moda</li>
+        <li>Mantener el gesto de cuidado como ritual, no como obligación</li>
+      </ul>
+    </div>
+    <div class="result-cta">
+      <h3>Sigue aprendiendo sobre tu piel</h3>
+      <p>Ciencia de la piel real, sin filtros de marketing ni ingredientes milagrosos.</p>
+      <a href="https://instagram.com/laro_skin_rituals" target="_blank" class="btn-cta">Sígueme en Instagram</a>
+    </div>
+  </div>
+
+  <!-- RESULTADO 2: SENSIBILIZADA -->
+  <div class="result-block" id="resultSensibilizada">
+    <div class="result-tag">Tu resultado</div>
+    <div class="result-title">Barrera sensibilizada</div>
+    <div class="result-subtitle">Tu piel está en alerta</div>
+    <div class="result-divider"></div>
+    <div class="result-body">
+      <p>Tu piel trabaja más de lo que debería para mantenerse equilibrada. Hay señales de que algo la está sobrecargando: <strong>puede ser el estrés, productos no adecuados, el entorno, o una rutina que no termina de encajar.</strong></p>
+      <br>
+      <p>No está dañada, pero está en un momento en que <strong>los cuidados importan mucho</strong>. La diferencia entre una barrera que se recupera y una que sigue deteriorándose suele estar en decisiones pequeñas: qué usas, en qué orden y con qué frecuencia.</p>
+    </div>
+    <div class="result-tips">
+      <h4>Qué le viene bien a tu piel ahora mismo</h4>
+      <ul>
+        <li>Simplificar la rutina: menos productos, más compatibles entre sí</li>
+        <li>Priorizar ingredientes reparadores que se parezcan estructuralmente a la barrera de nuestra piel (cosmética orgánica)</li>
+        <li>Evitar activos agresivos hasta que la barrera se estabilice</li>
+        <li>Proteger siempre con SPF, sobre todo en las horas centrales de sol (índice UV ≥3)</li>
+        <li>Revisar el limpiador: es el producto que más puede comprometer o proteger la barrera</li>
+      </ul>
+    </div>
+    <div class="result-cta">
+      <h3>¿Quieres entender qué está pasando en tu piel?</h3>
+      <p>Ciencia de la piel real, sin rodeos ni ingredientes de marketing.</p>
+      <a href="https://instagram.com/laro_skin_rituals" target="_blank" class="btn-cta">Sígueme en Instagram</a>
+    </div>
+  </div>
+
+  <!-- RESULTADO 3: COMPROMETIDA -->
+  <div class="result-block" id="resultComprometida">
+    <div class="result-tag">Tu resultado</div>
+    <div class="result-title">Barrera comprometida</div>
+    <div class="result-subtitle">Tu piel necesita atención</div>
+    <div class="result-divider"></div>
+    <div class="result-body">
+      <p>Tu piel está enviando señales claras. La tirantez, las reacciones frecuentes y la sensibilidad son síntomas de una barrera que está bajo presión real: <strong>no retiene bien la hidratación, no filtra adecuadamente los agresores y se inflama con facilidad.</strong></p>
+      <br>
+      <p>La buena noticia: <strong>la barrera cutánea se puede restaurar.</strong> No es rápido, pero hay un camino claro. El primer paso es dejar de añadir cosas y empezar a entender qué necesita tu piel de verdad.</p>
+    </div>
+    <div class="result-tips">
+      <h4>Por dónde empezar</h4>
+      <ul>
+        <li>Para. Menos productos, no más. La barrera necesita calma, no estímulos</li>
+        <li>Cambia a un limpiador suave, en aceite o crema. Evita la doble limpieza salvo que uses mucho maquillaje — y si puedes dejarlo por una temporada, mejor</li>
+        <li>Hidratación profunda con ingredientes que retengan la hidratación, como el ácido hialurónico</li>
+        <li>SPF todos los días, sin excepción</li>
+        <li>Revisa el estrés y tus digestiones</li>
+      </ul>
+    </div>
+    <div class="result-cta">
+      <h3>Tu piel puede recuperarse</h3>
+      <p>Ciencia de la piel real, sin urgencia artificial y sin productos milagrosos.</p>
+      <a href="https://instagram.com/laro_skin_rituals" target="_blank" class="btn-cta">Sígueme en Instagram</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>LARŌ · Organic Skin Rituals · hola@larō.com</footer>
+
+<script>
+  const answers = [];
+  let currentQ = 0;
+  let selectedScore = null;
+  let totalScore = 0;
+
+  function startTest() {
+    document.getElementById('introBlock').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'block';
+    showQuestion(1);
+  }
+
+  function showQuestion(n) {
+    document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+    document.getElementById('q' + n).classList.add('active');
+    currentQ = n;
+    selectedScore = null;
+    updateProgress(n);
+    const nextBtn = document.getElementById('next' + n);
+    if (nextBtn) nextBtn.classList.remove('visible');
+  }
+
+  function updateProgress(n) {
+    const pct = Math.round((n / 7) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = 'Pregunta ' + n + ' de 7';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  function selectOption(el, score) {
+    const parent = el.closest('.options');
+    parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedScore = score;
+    const nextBtn = document.getElementById('next' + currentQ);
+    if (nextBtn) nextBtn.classList.add('visible');
+  }
+
+  function nextQuestion(current) {
+    if (selectedScore === null) return;
+    totalScore += selectedScore;
+    showQuestion(current + 1);
+  }
+
+  function showCapture() {
+    if (selectedScore === null) return;
+    totalScore += selectedScore;
+    document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('captureBlock').classList.add('active');
+  }
+
+  async function revealResult() {
+    const nombre = document.getElementById('capNombre').value.trim();
+    const email = document.getElementById('capEmail').value.trim();
+    if (!nombre || !email) { alert('Por favor, rellena tu nombre y email.'); return; }
+
+    const btn = document.getElementById('btnReveal');
+    btn.disabled = true;
+    btn.textContent = 'Un momento...';
+
+    // Kit subscription
+    try {
+      const kitData = new FormData();
+      kitData.append('email_address', email);
+      kitData.append('fields[first_name]', nombre);
+      await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
+        method: 'POST', body: kitData, headers: { 'Accept': 'application/json' }
+      });
+    } catch (_) {}
+
+    // Show result
+    document.getElementById('captureBlock').classList.remove('active');
+
+    let resultId;
+    if (totalScore <= 4) resultId = 'resultSana';
+    else if (totalScore <= 8) resultId = 'resultSensibilizada';
+    else resultId = 'resultComprometida';
+
+    // Personalize with name
+    const block = document.getElementById(resultId);
+    const tag = block.querySelector('.result-tag');
+    tag.textContent = nombre.split(' ')[0] + ', tu resultado';
+
+    block.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
