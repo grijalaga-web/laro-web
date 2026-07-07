@@ -1,0 +1,26 @@
+{
+  "name": "LARŌ · Organic Skin Rituals",
+  "short_name": "LARŌ",
+  "description": "Rituales de piel con base científica. Por Sarai Orrego, bioquímica y bióloga molecular.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F9F7F6",
+  "theme_color": "#540B0E",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "narciso.laro.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "laro-flower.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -9,6 +9,14 @@
 <link rel="icon" type="image/png" href="laro-flower.png">
 <link rel="canonical" href="https://larō.com/">
 
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#540B0E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LARŌ">
+<link rel="apple-touch-icon" href="narciso.laro.png">
+
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://larō.com/">
@@ -1050,6 +1058,13 @@
       if (e.target === m) m.classList.remove('open'), document.body.style.overflow = '';
     });
   });
+
+  // PWA service worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
 
   // Newsletter → Kit
   const nlForm = document.getElementById('newsletterForm');
