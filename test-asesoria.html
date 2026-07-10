@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de piel · LARŌ</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream:  #F9F7F6;
+    --pink:   #E9D9D6;
+    --dark:   #2A1A1B;
+    --text:   #3D2B2C;
+    --muted:  #8A7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--text); font-family: 'Lato', sans-serif; font-weight: 300; }
+
+  .test-wrap { max-width: 680px; margin: 0 auto; padding: 64px 32px 100px; }
+
+  .test-logo {
+    text-align: center; margin-bottom: 48px;
+  }
+  .test-logo img { height: 120px; mix-blend-mode: multiply; }
+
+  .test-header { text-align: center; margin-bottom: 48px; }
+  .test-eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet); margin-bottom: 16px;
+  }
+  .test-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; line-height: 1.2; color: var(--dark); margin-bottom: 16px;
+  }
+  .test-titulo em { font-style: italic; color: var(--garnet); }
+  .test-intro { font-size: 0.95rem; line-height: 1.8; color: var(--muted); }
+
+  .test-seccion { margin-bottom: 40px; }
+  .test-seccion-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--garnet);
+    border-bottom: 1px solid var(--pink); padding-bottom: 8px; margin-bottom: 20px;
+  }
+
+  .test-grupo { margin-bottom: 20px; }
+  .test-grupo label {
+    display: block; font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;
+  }
+  .test-grupo .sub { font-weight: 300; color: var(--muted); font-size: 0.82rem; display: block; margin-top: 2px; }
+
+  input[type=text], input[type=email], select, textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid var(--pink); background: white; color: var(--text);
+    font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 300;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--garnet); }
+  textarea { min-height: 80px; resize: vertical; }
+  select { cursor: pointer; }
+
+  .opciones-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .opcion-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border: 1px solid var(--pink); background: white;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  .opcion-item:hover { border-color: var(--garnet); }
+  .opcion-item input[type=checkbox], .opcion-item input[type=radio] {
+    width: auto; padding: 0; border: none; accent-color: var(--garnet);
+  }
+  .opcion-item span { font-size: 0.85rem; }
+
+  .btn-enviar {
+    display: block; width: 100%; padding: 16px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.3s; margin-top: 40px;
+  }
+  .btn-enviar:hover { background: var(--dark); }
+
+  /* Resultado */
+  .resultado { display: none; }
+  .resultado-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; line-height: 1.3; color: var(--dark); margin-bottom: 12px;
+  }
+  .resultado-titulo em { font-style: italic; color: var(--garnet); }
+  .resultado-sub { font-size: 0.9rem; line-height: 1.7; color: var(--muted); margin-bottom: 32px; }
+  .codigo-bloque {
+    background: var(--dark); padding: 20px 24px; border-radius: 2px; margin-bottom: 24px;
+  }
+  .codigo-label {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 8px; display: block;
+  }
+  .codigo-text {
+    font-family: monospace; font-size: 0.75rem; color: var(--cream);
+    word-break: break-all; line-height: 1.6;
+  }
+  .btn-copiar {
+    display: inline-block; padding: 10px 24px;
+    background: transparent; color: var(--garnet);
+    font-family: 'Lato', sans-serif; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid var(--garnet); cursor: pointer; transition: all 0.2s;
+    margin-right: 12px; margin-top: 12px;
+  }
+  .btn-copiar:hover { background: var(--garnet); color: var(--cream); }
+  .btn-email {
+    display: inline-block; padding: 10px 24px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.2s;
+    margin-top: 12px; text-decoration: none;
+  }
+  .btn-email:hover { background: var(--dark); }
+  .copiado { color: #2E7D32; font-size: 0.8rem; margin-top: 8px; display: none; }
+
+  .divider { border: none; border-top: 1px solid var(--pink); margin: 32px 0; }
+
+  footer-test {
+    display: block; text-align: center; margin-top: 48px;
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 600px) {
+    .test-wrap { padding: 40px 20px 80px; }
+    .opciones-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="test-wrap">
+
+  <div class="test-logo">
+    <img src="narciso.laro.png" alt="LARŌ">
+  </div>
+
+  <div class="test-header">
+    <p class="test-eyebrow">Antes de nuestra sesión</p>
+    <h1 class="test-titulo">Cuéntame cómo<br>está tu <em>piel</em></h1>
+    <p class="test-intro">Este test me ayuda a conocer tu piel antes de que nos veamos. Complétalo con sinceridad — no hay respuestas incorrectas, solo información útil. Tarda unos 10 minutos.</p>
+  </div>
+
+  <!-- FORMULARIO -->
+  <form id="test-form">
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Datos de contacto</p>
+      <div class="test-grupo">
+        <label>Nombre completo</label>
+        <input type="text" id="t-nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="test-grupo">
+        <label>Email</label>
+        <input type="email" id="t-email" placeholder="tu@email.com" required>
+      </div>
+      <div class="test-grupo">
+        <label>Edad</label>
+        <input type="text" id="t-edad" placeholder="Ej: 34">
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Tipo de piel</p>
+      <div class="test-grupo">
+        <label>¿Cómo describirías tu piel habitualmente? <span class="sub">Puedes marcar más de una.</span></label>
+        <div class="opciones-grid">
+          <label class="opcion-item"><input type="checkbox" name="piel" value="normal"><span>Normal (equilibrada)</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="seca"><span>Seca</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="grasa"><span>Grasa</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="mixta"><span>Mixta</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="sensible"><span>Sensible</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="deshidratada"><span>Deshidratada</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="acneica"><span>Propensa al acné</span></label>
+          <label class="opcion-item"><input type="checkbox" name="piel" value="madura"><span>Madura</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Comportamiento de la piel</p>
+      <div class="test-grupo">
+        <label>Al despertar, ¿cómo está tu piel?</label>
+        <select id="t-manana">
+          <option value="">— Selecciona —</option>
+          <option value="equilibrada">Equilibrada, sin brillo ni tirantez</option>
+          <option value="grasa_total">Con brillo generalizado</option>
+          <option value="grasa_zona_t">Con brillo solo en la zona T</option>
+          <option value="tirante">Tirante o seca</option>
+          <option value="mixta">Grasa en T, tirante en mejillas</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>Al final del día, ¿cómo está tu piel?</label>
+        <select id="t-tarde">
+          <option value="">— Selecciona —</option>
+          <option value="equilibrada">Igual que por la mañana</option>
+          <option value="mas_grasa">Más grasa que por la mañana</option>
+          <option value="mas_tirante">Más tirante o apagada</option>
+          <option value="muy_diferente">Muy diferente según el día</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>Después de lavarte la cara, ¿cuánto tarda en volver a estar bien?</label>
+        <select id="t-postlavado">
+          <option value="">— Selecciona —</option>
+          <option value="normal">Se normaliza rápido (menos de 15 min)</option>
+          <option value="tirante_corta">Queda tirante 15-20 minutos</option>
+          <option value="tirante_larga">Sigue tirante más de 20 min (barrera comprometida)</option>
+          <option value="grasa_rapido">Enseguida se vuelve grasa</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Tu piel reacciona fácilmente a nuevos productos?</label>
+        <select id="t-reaccion">
+          <option value="">— Selecciona —</option>
+          <option value="raramente">Raramente</option>
+          <option value="aveces">A veces (rojez leve, picor puntual)</option>
+          <option value="frecuente">Con frecuencia (necesito probar en zona pequeña siempre)</option>
+          <option value="siempre">Casi siempre reacciono</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Afecciones y preocupaciones</p>
+      <div class="test-grupo">
+        <label>¿Tienes alguna de estas afecciones? <span class="sub">Marca todo lo que aplique.</span></label>
+        <div class="opciones-grid">
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="acne_activo"><span>Acné activo</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="manchas"><span>Manchas / hiperpigmentación</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="rosacea"><span>Rosácea o cuperosis</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="dermatitis"><span>Dermatitis atópica</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="psoriasis"><span>Psoriasis</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="poros"><span>Poros dilatados</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="arrugas"><span>Arrugas / pérdida de firmeza</span></label>
+          <label class="opcion-item"><input type="checkbox" name="afecciones" value="ojeras"><span>Ojeras / bolsas</span></label>
+        </div>
+      </div>
+      <div class="test-grupo">
+        <label>¿Qué es lo que más te preocupa de tu piel ahora mismo?</label>
+        <textarea id="t-preocupacion" placeholder="Descríbelo con tus palabras..."></textarea>
+      </div>
+      <div class="test-grupo">
+        <label>¿Tienes alergias conocidas a algún ingrediente cosmético?</label>
+        <textarea id="t-alergias" placeholder="Ej: alergia a la lavanda, a las fragancias en general..."></textarea>
+      </div>
+      <div class="test-grupo">
+        <label>¿Estás tomando alguna medicación que pueda afectar a la piel?</label>
+        <textarea id="t-medicacion" placeholder="Ej: antibióticos, anticonceptivos, retinoides orales, isotretinoína..."></textarea>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Ciclo hormonal</p>
+      <div class="test-grupo">
+        <label>Situación actual <span class="sub">Marca todo lo que aplique.</span></label>
+        <div class="opciones-grid">
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="ciclo_regular"><span>Ciclo regular</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="ciclo_irregular"><span>Ciclo irregular</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="anticonceptivos"><span>Uso anticonceptivos hormonales</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="embarazo"><span>Embarazo</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="lactancia"><span>Lactancia</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="perimenopausia"><span>Perimenopausia</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="menopausia"><span>Menopausia</span></label>
+          <label class="opcion-item"><input type="checkbox" name="ciclo" value="sin_ciclo"><span>Sin ciclo / no aplica</span></label>
+        </div>
+      </div>
+      <div class="test-grupo">
+        <label>¿Notas cambios en tu piel a lo largo del mes?</label>
+        <textarea id="t-ciclo-obs" placeholder="Ej: la semana antes de la regla aparecen granitos en barbilla y el cutis se vuelve más graso..."></textarea>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Salud digestiva</p>
+      <div class="test-grupo">
+        <label>¿Cómo es tu regularidad intestinal?</label>
+        <select id="t-dig-regularidad">
+          <option value="">— Selecciona —</option>
+          <option value="regular">Regular (diaria o casi)</option>
+          <option value="irregular">Irregular (cada 2-3 días)</option>
+          <option value="estrenimiento">Estreñimiento frecuente</option>
+          <option value="diarrea">Deposiciones sueltas frecuentes</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Tienes hinchazón o gases con frecuencia?</label>
+        <select id="t-dig-hinchazon">
+          <option value="">— Selecciona —</option>
+          <option value="raramente">Raramente</option>
+          <option value="aveces">A veces (1-2 veces/semana)</option>
+          <option value="frecuente">Con frecuencia (varios días)</option>
+          <option value="siempre">Casi siempre</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Tienes intolerancias o sensibilidades alimentarias conocidas?</label>
+        <textarea id="t-dig-intolerancias" placeholder="Ej: intolerancia a la lactosa, sensibilidad al gluten..."></textarea>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Estilo de vida</p>
+      <div class="test-grupo">
+        <label>¿Cómo describirías tu nivel de estrés habitual?</label>
+        <select id="t-estres">
+          <option value="">— Selecciona —</option>
+          <option value="bajo">Bajo (raramente me afecta)</option>
+          <option value="moderado">Moderado (hay épocas difíciles)</option>
+          <option value="alto">Alto (es una constante)</option>
+          <option value="muy_alto">Muy alto (está afectando claramente mi bienestar)</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Cuántas horas duermes de media?</label>
+        <select id="t-sueno">
+          <option value="">— Selecciona —</option>
+          <option value="menos6">Menos de 6 horas</option>
+          <option value="6a7">6-7 horas</option>
+          <option value="7a8">7-8 horas</option>
+          <option value="mas8">Más de 8 horas</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Cuánta agua bebes al día?</label>
+        <select id="t-agua">
+          <option value="">— Selecciona —</option>
+          <option value="poca">Menos de 1 litro</option>
+          <option value="suficiente">1-1,5 litros</option>
+          <option value="buena">1,5-2 litros</option>
+          <option value="mucha">Más de 2 litros</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Rutina actual y objetivos</p>
+      <div class="test-grupo">
+        <label>¿Qué productos usas ahora mismo? <span class="sub">Mañana y noche, todo lo que apliques en la cara.</span></label>
+        <textarea id="t-rutina" placeholder="Ej: Agua micelar Bioderma por la mañana · Crema hidratante Avène · Noche: lo mismo + aceite de argán..."></textarea>
+      </div>
+      <div class="test-grupo">
+        <label>¿Qué tipo de cosmética quieres usar?</label>
+        <select id="t-tipo-cosmetica">
+          <option value="">— Selecciona —</option>
+          <option value="natural_organica">Natural y, si es posible, orgánica (ya lo estoy haciendo)</option>
+          <option value="natural_transicion">Me quiero pasar a natural (estoy en transición)</option>
+          <option value="natural_abierta">Quiero probar natural pero no tengo claro el camino</option>
+          <option value="sin_preferencia">Sin preferencia fuerte por ahora</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Cuánto tiempo le dedicas a tu rutina (o quieres dedicarle)?</label>
+        <select id="t-tiempo">
+          <option value="">— Selecciona —</option>
+          <option value="menos5">Menos de 5 minutos</option>
+          <option value="5a10">5-10 minutos</option>
+          <option value="10a15">10-15 minutos</option>
+          <option value="mas15">Más de 15 minutos (me gusta el ritual)</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Cuál es tu objetivo principal con esta asesoría?</label>
+        <div class="opciones-grid">
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="simplificar"><span>Simplificar mi rutina</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="hidratacion"><span>Mejorar la hidratación</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="acne"><span>Controlar el acné</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="manchas"><span>Reducir manchas</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="antiedad"><span>Antiedad / firmeza</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="calmar"><span>Calmar piel sensible</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="barrera"><span>Reparar la barrera</span></label>
+          <label class="opcion-item"><input type="checkbox" name="objetivos" value="ritual"><span>Crear un ritual consciente</span></label>
+        </div>
+      </div>
+      <div class="test-grupo">
+        <label>¿Cuánto dedicas a cosmética al mes, aproximadamente?</label>
+        <select id="t-presupuesto">
+          <option value="">— Selecciona —</option>
+          <option value="menos30">Menos de 30€</option>
+          <option value="30a70">30-70€</option>
+          <option value="70a150">70-150€</option>
+          <option value="mas150">Más de 150€</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>¿Algo más que quieras contarme antes de vernos?</label>
+        <textarea id="t-libre" placeholder="Cualquier cosa que creas que es importante y no encaje en las preguntas anteriores..."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-enviar">Enviar mis respuestas a Sarai</button>
+
+  </form>
+
+  <!-- RESULTADO -->
+  <div class="resultado" id="resultado">
+    <h2 class="resultado-titulo">Listo. <em>Gracias por tu tiempo.</em></h2>
+    <p class="resultado-sub">He recibido tus respuestas. Ahora solo tienes que enviarlas a Sarai usando el botón de abajo. Nos vemos en la sesión.</p>
+
+    <div class="codigo-bloque">
+      <span class="codigo-label">Código de importación</span>
+      <div class="codigo-text" id="codigo-output"></div>
+    </div>
+    <button class="btn-copiar" onclick="copiarCodigo()">Copiar código</button>
+    <a class="btn-email" id="btn-mailto" href="#">Enviar por email a Sarai</a>
+    <p class="copiado" id="msg-copiado">Código copiado al portapapeles</p>
+
+    <hr class="divider">
+    <p style="font-size:0.82rem;line-height:1.7;color:var(--muted)">
+      Si el botón de email no abre tu aplicación de correo, copia el código de arriba y envíalo manualmente a <strong>hola@larō.com</strong> con el asunto <em>Test de piel — [tu nombre]</em>.
+    </p>
+  </div>
+
+  <footer-test>LARŌ · Organic Skin Rituals · hola@larō.com</footer-test>
+</div>
+
+<script>
+const form = document.getElementById('test-form');
+const resultado = document.getElementById('resultado');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const checks = name => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(c => c.value);
+
+  const datos = {
+    nombre:           val('t-nombre'),
+    email:            val('t-email'),
+    edad:             val('t-edad'),
+    pieles:           checks('piel'),
+    pielManana:       val('t-manana'),
+    pielTarde:        val('t-tarde'),
+    pielPostlavado:   val('t-postlavado'),
+    pielReaccion:     val('t-reaccion'),
+    afecciones:       checks('afecciones'),
+    pielPreocupacion: val('t-preocupacion'),
+    alergias:         val('t-alergias'),
+    medicacion:       val('t-medicacion'),
+    ciclo:            checks('ciclo'),
+    cicloObs:         val('t-ciclo-obs'),
+    digRegularidad:   val('t-dig-regularidad'),
+    digHinchazon:     val('t-dig-hinchazon'),
+    digIntolerancias: val('t-dig-intolerancias'),
+    estres:           val('t-estres'),
+    sueno:            val('t-sueno'),
+    agua:             val('t-agua'),
+    rutina:           val('t-rutina'),
+    tipoCosmetica:    val('t-tipo-cosmetica'),
+    tiempoRutina:     val('t-tiempo'),
+    objetivos:        checks('objetivos'),
+    presupuesto:      val('t-presupuesto'),
+    notasIniciales:   val('t-libre'),
+    fechaAlta:        new Date().toLocaleDateString('es-ES'),
+    _origen:          'test-piel-web',
+  };
+
+  // Código de importación (base64 JSON)
+  const json = JSON.stringify(datos);
+  const codigo = btoa(unescape(encodeURIComponent(json)));
+  document.getElementById('codigo-output').textContent = codigo;
+
+  // Resumen legible para el email
+  const lineas = [
+    `Test de piel LARŌ — ${datos.nombre}`,
+    `Email: ${datos.email}`,
+    datos.edad ? `Edad: ${datos.edad}` : '',
+    '',
+    `Tipo de piel: ${datos.pieles.join(', ') || '—'}`,
+    `Afecciones: ${datos.afecciones.join(', ') || '—'}`,
+    datos.pielPreocupacion ? `Preocupación principal: ${datos.pielPreocupacion}` : '',
+    datos.alergias ? `Alergias: ${datos.alergias}` : '',
+    datos.medicacion ? `Medicación: ${datos.medicacion}` : '',
+    '',
+    `Ciclo: ${datos.ciclo.join(', ') || '—'}`,
+    datos.cicloObs ? `Ciclo obs: ${datos.cicloObs}` : '',
+    '',
+    `Digestivo — regularidad: ${datos.digRegularidad || '—'} | hinchazón: ${datos.digHinchazon || '—'}`,
+    datos.digIntolerancias ? `Intolerancias: ${datos.digIntolerancias}` : '',
+    '',
+    `Estrés: ${datos.estres || '—'} | Sueño: ${datos.sueno || '—'} | Agua: ${datos.agua || '—'}`,
+    '',
+    `Objetivos: ${datos.objetivos.join(', ') || '—'}`,
+    `Presupuesto: ${datos.presupuesto || '—'}`,
+    datos.rutina ? `Rutina actual: ${datos.rutina}` : '',
+    datos.notasIniciales ? `Notas libres: ${datos.notasIniciales}` : '',
+    '',
+    '— CÓDIGO DE IMPORTACIÓN —',
+    codigo,
+  ].filter(l => l !== undefined && l !== null);
+
+  const cuerpo = encodeURIComponent(lineas.join('\n'));
+  const asunto = encodeURIComponent(`Test de piel LARŌ — ${datos.nombre}`);
+  document.getElementById('btn-mailto').href = `mailto:hola@larō.com?subject=${asunto}&body=${cuerpo}`;
+
+  form.style.display = 'none';
+  resultado.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+);
+
+function copiarCodigo() {
+  const txt = document.getElementById('codigo-output').textContent;
+  navigator.clipboard.writeText(txt).then(() => {
+    const msg = document.getElementById('msg-copiado');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 2500);
+  });
+}
+</script>
+</body>
+</html>
