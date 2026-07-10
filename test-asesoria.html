@@ -411,8 +411,8 @@
       <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid var(--pink);background:white">
         <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--garnet);line-height:1;flex-shrink:0">1</span>
         <div>
-          <p style="font-weight:700;font-size:0.88rem;margin-bottom:6px">Copia tu código</p>
-          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Pulsa el botón y queda guardado en tu portapapeles.</p>
+          <p style="font-weight:700;font-size:1rem;margin-bottom:6px">Copia tu código</p>
+          <p style="font-size:0.92rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Pulsa el botón y queda guardado en tu portapapeles.</p>
           <button class="btn-copiar" onclick="copiarCodigo()" id="btn-copiar-main">Copiar código</button>
           <p class="copiado" id="msg-copiado">✓ Copiado</p>
         </div>
@@ -431,6 +431,10 @@
       <span class="codigo-label">Tu código (por si necesitas copiarlo de nuevo)</span>
       <div class="codigo-text" id="codigo-output"></div>
     </div>
+
+    <p style="margin-top:20px;font-size:1rem;line-height:1.7;color:var(--text)">
+      ¿No tienes Gmail? Copia el código, abre tu email, escribe a <strong>hola@larō.com</strong> con el asunto <em>Test de asesoría — [tu nombre]</em> y pega el código en el cuerpo.
+    </p>
   </div>
 
   <footer-test>LARŌ · Organic Skin Rituals · hola@larō.com</footer-test>
@@ -483,8 +487,9 @@ form.addEventListener('submit', function(e) {
   document.getElementById('codigo-output').textContent = codigo;
 
   const asunto = encodeURIComponent(`Test de asesoría LARŌ — ${datos.nombre}`);
-  const cuerpo = encodeURIComponent(`Hola Sarai,\n\nAquí te mando el código de importación de mi test de piel.\n\n[PEGA AQUÍ EL CÓDIGO]\n\n${datos.nombre}`);
-  document.getElementById('btn-mailto').href = `mailto:hola@larō.com?subject=${asunto}&body=${cuerpo}`;
+  const cuerpo = encodeURIComponent(`Hola Sarai,\n\nAquí te mando el código de importación de mi test de piel. Pégalo donde pone [CÓDIGO]:\n\n[CÓDIGO]\n\n${datos.nombre}`);
+  document.getElementById('btn-mailto').href = `https://mail.google.com/mail/?view=cm&to=hola%40lar%C5%8D.com&su=${asunto}&body=${cuerpo}`;
+  document.getElementById('btn-mailto').target = '_blank';
 
   form.style.display = 'none';
   document.querySelector('.test-header').style.display = 'none';
