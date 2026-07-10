@@ -645,10 +645,10 @@
     <div class="nav-dropdown" id="navDropdown">
       <a href="#" onclick="toggleDropdown(event)">Rituales</a>
       <div class="dropdown-menu">
-        <a href="#" onclick="openModal('asesoria')">Asesoría 1:1 <span class="badge-pronto">Próximamente</span></a>
+        <a href="#" onclick="openModal('asesoria')">Asesoría 1:1 <span class="badge-pronto">Sin plazas</span></a>
         <a href="#" onclick="openModal('curso')">Curso <span class="badge-pronto">Próximamente</span></a>
         <a href="#" onclick="openModal('podcast')">Podcast <span class="badge-pronto">Próximamente</span></a>
-        <a href="#" onclick="openModal('talleres')">Talleres presenciales <span class="badge-pronto">Próximamente</span></a>
+        <a href="#" onclick="openModal('talleres')">Talleres presenciales <span class="badge-pronto">Fechas por definir</span></a>
       </div>
     </div>
   </div>
@@ -668,13 +668,13 @@
   <a href="#valores" onclick="toggleMobileMenu()">Los valores</a>
   <div class="mobile-divider"></div>
   <a href="#" onclick="toggleMobileMenu();openModal('asesoria')">Asesoría 1:1</a>
-  <span class="mobile-pronto">Próximamente</span>
+  <span class="mobile-pronto">Sin plazas · Lista de espera abierta</span>
   <a href="#" onclick="toggleMobileMenu();openModal('curso')">Curso</a>
   <span class="mobile-pronto">Próximamente</span>
   <a href="#" onclick="toggleMobileMenu();openModal('podcast')">Podcast</a>
   <span class="mobile-pronto">Próximamente</span>
   <a href="#" onclick="toggleMobileMenu();openModal('talleres')">Talleres presenciales</a>
-  <span class="mobile-pronto">Próximamente</span>
+  <span class="mobile-pronto">Fechas por definir</span>
   <div class="mobile-divider"></div>
   <a href="#newsletter" onclick="toggleMobileMenu()">Newsletter</a>
 </div>
@@ -683,10 +683,12 @@
 <div class="modal" id="modal-asesoria">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('asesoria')">×</button>
-    <span class="modal-badge">Próximamente</span>
+    <span class="modal-badge">Sin plazas · Lista de espera abierta</span>
     <h2>Asesoría <em>1:1</em></h2>
-    <p>Una sesión cara a cara con Sarai. Analizamos tu piel, revisamos tus productos actuales y construimos juntas tu ritual personalizado.</p>
-    <p>Sin rutinas genéricas. Sin productos de más. Solo lo que necesita tu piel y adaptado a tu vida real.</p>
+    <p>Una sesión individual con Sarai. Empezamos con una anamnesis de piel completa: tipo de piel, afecciones, ciclo hormonal, estilo de vida y lo que ya tienes en casa. Todo cuenta.</p>
+    <p>A partir de ahí, Sarai hace un diagnóstico real y construís juntas un ritual adaptado a ti: los productos concretos que necesitas, el orden, la frecuencia y el porqué de cada paso.</p>
+    <p>La sesión incluye seguimiento posterior. No es una consulta puntual — es el punto de partida de una relación distinta con tu piel.</p>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:4px">Disponible para clientas en Península y Baleares.</p>
     <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('asesoria')">Apuntarme a la lista de espera</a>
   </div>
 </div>
@@ -719,11 +721,12 @@
 <div class="modal" id="modal-talleres">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('talleres')">×</button>
-    <span class="modal-badge">Próximamente</span>
+    <span class="modal-badge">Próximas fechas por definir</span>
     <h2>Talleres <em>presenciales</em></h2>
-    <p>Un espacio para aprender, tocarse la piel y entenderla de verdad. Sesiones en grupo con Sarai donde trabajamos los rituales, los ingredientes y la rutina personalizada de cada una.</p>
-    <p>Porque hay cosas que se aprenden mejor en persona, con las manos y con tiempo.</p>
-    <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('talleres')">Apuntarme a la lista de espera</a>
+    <p>Una experiencia con las manos en la piel. Sarai guía el taller con joyas de tocador — gua sha, ventosas de cupping, cepillos de cepillado en seco, champiñones de cuarzo — y enseña el masaje facial paso a paso.</p>
+    <p>No es una clase magistral. Es un rato para aprender haciendo, con tiempo de sobra para sentir cómo responde tu piel a cada técnica. Cada asistente se lleva un dossier imprimible para seguir practicando en casa.</p>
+    <p>Las fechas todavía no están cerradas. Apúntate y serás la primera en saberlo.</p>
+    <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('talleres')">Avisarme de las próximas fechas</a>
   </div>
 </div>
 

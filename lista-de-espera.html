@@ -26,7 +26,6 @@
     min-height: 100vh;
   }
 
-  /* ── HEADER ── */
   header {
     text-align: center;
     padding: 48px 24px 0;
@@ -37,11 +36,10 @@
     mix-blend-mode: multiply;
   }
 
-  /* ── HERO ── */
   .page-hero {
     text-align: center;
-    padding: 48px 24px 56px;
-    max-width: 620px;
+    padding: 48px 24px 40px;
+    max-width: 600px;
     margin: 0 auto;
   }
   .page-label {
@@ -51,13 +49,13 @@
   }
   .page-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 300; line-height: 1.2; color: var(--dark);
     margin-bottom: 20px;
   }
   .page-title em { font-style: italic; color: var(--garnet); }
   .page-sub {
-    font-size: 1rem; line-height: 1.75; color: var(--muted);
+    font-size: 0.95rem; line-height: 1.8; color: var(--muted);
   }
   .divider {
     width: 1px; height: 48px;
@@ -65,28 +63,25 @@
     margin: 32px auto;
   }
 
-  /* ── FORM ── */
   .form-wrap {
-    max-width: 640px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 0 24px 80px;
   }
-  .form-group { margin-bottom: 28px; }
+  .form-group { margin-bottom: 24px; }
   label {
     display: block;
-    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--dark);
     margin-bottom: 10px;
   }
-  label .opcional {
+  label .opc {
     font-weight: 300; color: var(--muted);
-    text-transform: none; letter-spacing: 0;
-    font-size: 0.75rem;
+    text-transform: none; letter-spacing: 0; font-size: 0.72rem;
   }
   input[type="text"],
   input[type="email"],
-  textarea,
-  select {
+  textarea {
     width: 100%;
     padding: 14px 16px;
     background: white;
@@ -99,94 +94,78 @@
     transition: border-color 0.2s;
     -webkit-appearance: none;
   }
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--garnet);
-  }
-  textarea { resize: vertical; min-height: 100px; }
+  input:focus, textarea:focus { border-color: var(--garnet); }
+  textarea { resize: vertical; min-height: 88px; }
 
-  /* Radio y checkboxes */
-  .options-list { list-style: none; }
-  .options-list li { margin-bottom: 10px; }
-  .options-list label {
-    display: flex; align-items: flex-start; gap: 12px;
-    font-size: 0.92rem; font-weight: 300;
-    text-transform: none; letter-spacing: 0;
-    color: var(--text); cursor: pointer;
-    padding: 12px 16px;
-    border: 1px solid var(--pink);
-    background: white;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .options-list label:hover { background: var(--pink); }
-  .options-list input[type="radio"],
-  .options-list input[type="checkbox"] {
-    width: 16px; min-width: 16px; height: 16px;
-    margin-top: 2px; padding: 0;
-    accent-color: var(--garnet);
-    border: 1px solid var(--pink);
-    cursor: pointer;
-  }
-  .options-list input:checked + span { color: var(--dark); font-weight: 400; }
-
-  /* Submit */
   .btn-submit {
     width: 100%;
     padding: 18px;
     background: var(--garnet); color: var(--cream);
     font-family: 'Lato', sans-serif;
-    font-size: 0.78rem; font-weight: 700;
+    font-size: 0.75rem; font-weight: 700;
     letter-spacing: 0.25em; text-transform: uppercase;
     border: none; cursor: pointer;
     transition: background 0.3s;
+    margin-top: 8px;
   }
   .btn-submit:hover { background: var(--dark); }
-  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Paso indicador */
-  .paso-indicator {
-    text-align: center;
-    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--muted);
-    margin-bottom: 8px;
+  .privacy-note {
+    margin-top: 16px;
+    font-size: 0.7rem; color: var(--muted); text-align: center; line-height: 1.6;
   }
 
-  /* Éxito */
+  .error-msg {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: #fdf0f0;
+    border-left: 3px solid var(--garnet);
+    font-size: 0.82rem; line-height: 1.6; color: var(--text);
+  }
+  .error-msg a { color: var(--garnet); }
+
   .success-msg {
     display: none;
     text-align: center;
-    padding: 64px 24px;
-    max-width: 560px;
+    padding: 64px 24px 80px;
+    max-width: 520px;
     margin: 0 auto;
+  }
+  .success-icon {
+    width: 1px; height: 52px;
+    background: var(--garnet);
+    margin: 0 auto 28px;
   }
   .success-msg h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem; font-weight: 300;
+    font-size: 2.2rem; font-weight: 300;
     color: var(--dark); margin-bottom: 16px;
   }
   .success-msg h2 em { color: var(--garnet); font-style: italic; }
-  .success-msg p { font-size: 1rem; line-height: 1.75; color: var(--muted); margin-bottom: 24px; }
-  .success-msg a {
+  .success-msg p {
+    font-size: 0.95rem; line-height: 1.8;
+    color: var(--muted); margin-bottom: 32px;
+  }
+  .success-msg a.btn-back {
     display: inline-block; padding: 14px 40px;
     background: var(--garnet); color: var(--cream);
     font-family: 'Lato', sans-serif;
-    font-size: 0.75rem; font-weight: 700;
+    font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.2em; text-transform: uppercase;
     text-decoration: none;
     transition: background 0.3s;
   }
-  .success-msg a:hover { background: var(--dark); }
+  .success-msg a.btn-back:hover { background: var(--dark); }
 
-  /* Footer */
   footer {
     background: var(--dark); color: rgba(249,247,246,0.4);
     text-align: center; padding: 32px 24px;
     font-size: 0.72rem; letter-spacing: 0.15em;
   }
   footer span { color: rgba(233,217,214,0.6); }
-  footer a {
-    color: rgba(249,247,246,0.4);
-    text-decoration: none;
-  }
+  footer a { color: rgba(249,247,246,0.4); text-decoration: none; }
   footer a:hover { color: var(--pink); }
 </style>
 </head>
@@ -198,147 +177,60 @@
   </a>
 </header>
 
-<!-- ── SUSCRIPCIÓN ── -->
-<div id="paso1">
+<div id="main-content">
   <div class="page-hero">
-    <span class="page-label">Lista de espera</span>
+    <span class="page-label">Asesoría · Lista de espera</span>
     <h1 class="page-title">Sé la primera<br><em>en saberlo.</em></h1>
-    <p class="page-sub">Únete a <strong>La Pausa</strong>, la newsletter de LARŌ, y serás la primera en saber cuándo empezamos.</p>
+    <p class="page-sub">Las asesorías 1:1 están temporalmente sin plazas.<br>
+    Déjame tus datos y te aviso en cuanto abra nuevas fechas.</p>
     <div class="divider"></div>
   </div>
 
   <div class="form-wrap">
-    <form id="form1">
+    <form id="waitlist-form">
       <div class="form-group">
-        <label for="nombre1">¿Cómo te llamas?</label>
-        <input type="text" id="nombre1" name="nombre" placeholder="Tu nombre" required>
+        <label for="nombre">¿Cómo te llamas?</label>
+        <input type="text" id="nombre" name="nombre"
+               placeholder="Tu nombre" required autocomplete="given-name">
       </div>
+
       <div class="form-group">
-        <label for="email1">Tu email</label>
-        <input type="email" id="email1" name="email" placeholder="hola@ejemplo.com" required>
+        <label for="email">Tu email</label>
+        <input type="email" id="email" name="email"
+               placeholder="hola@ejemplo.com" required autocomplete="email">
       </div>
-      <button type="submit" class="btn-submit" id="btn1">Apuntarme →</button>
+
+      <div class="form-group">
+        <label for="nota">
+          ¿Quieres contarme algo sobre tu piel?
+          <span class="opc">(opcional)</span>
+        </label>
+        <textarea id="nota" name="nota"
+                  placeholder="Tipo de piel, lo que más te preocupa, lo que llevas tiempo buscando…"></textarea>
+      </div>
+
+      <div id="error-msg" class="error-msg">
+        Algo no ha ido bien. Inténtalo de nuevo o escríbeme directamente a
+        <a href="mailto:hola@larō.com">hola@larō.com</a>.
+      </div>
+
+      <button type="submit" class="btn-submit" id="btn-submit">
+        Apuntarme a la lista →
+      </button>
+
+      <p class="privacy-note">
+        Tus datos solo se usan para avisarte cuando haya plazas. Sin spam. Sin cesión a terceros.
+      </p>
     </form>
   </div>
 </div>
 
-<!-- eliminado paso 2 / formspree -->
-
-      <!-- Relación con el skincare -->
-      <div class="form-group">
-        <label>¿Cómo describirías tu relación con el cuidado de tu piel ahora mismo?</label>
-        <ul class="options-list">
-          <li>
-            <label>
-              <input type="radio" name="relacion_piel" value="Tengo el baño lleno y no sé qué me funciona de verdad" required>
-              <span>Tengo el baño lleno y no sé qué me funciona de verdad</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="relacion_piel" value="Me cuido pero sin mucho criterio, voy un poco a ciegas">
-              <span>Me cuido pero sin mucho criterio, voy un poco a ciegas</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="relacion_piel" value="Quiero empezar pero no sé por dónde">
-              <span>Quiero empezar pero no sé por dónde</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="relacion_piel" value="Me cuido bien pero quiero entenderlo mejor">
-              <span>Me cuido bien pero quiero entenderlo mejor</span>
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Intereses -->
-      <div class="form-group">
-        <label>¿Qué es lo que más te interesa de LARŌ? <span class="opcional">(puedes marcar varias)</span></label>
-        <ul class="options-list">
-          <li>
-            <label>
-              <input type="checkbox" name="intereses" value="Entender ingredientes y leer etiquetas">
-              <span>Entender los ingredientes y aprender a leer etiquetas</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" name="intereses" value="Construir una rutina personalizada">
-              <span>Construir una rutina personalizada para mi piel</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" name="intereses" value="Asesoría personalizada 1:1">
-              <span>Asesoría personalizada 1:1 con Sarai</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" name="intereses" value="Talleres presenciales">
-              <span>Talleres presenciales</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" name="intereses" value="Podcast y newsletter">
-              <span>El podcast y la newsletter</span>
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Presupuesto -->
-      <div class="form-group">
-        <label>¿Cuánto sueles gastar al mes en productos de piel?</label>
-        <ul class="options-list">
-          <li>
-            <label>
-              <input type="radio" name="presupuesto" value="Menos de 20€" required>
-              <span>Menos de 20€</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="presupuesto" value="Entre 20 y 50€">
-              <span>Entre 20 y 50€</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="presupuesto" value="Entre 50 y 100€">
-              <span>Entre 50 y 100€</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="presupuesto" value="Más de 100€">
-              <span>Más de 100€</span>
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Texto libre -->
-      <div class="form-group">
-        <label for="mensaje">¿Hay algo que quieras contarme sobre tu piel o tu rutina? <span class="opcional">(opcional)</span></label>
-        <textarea id="mensaje" name="mensaje" placeholder="Cuéntame lo que quieras..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-submit">Enviar</button>
-    </form>
-  </div>
-</div>
-
-<!-- ── ÉXITO ── -->
-<div class="success-msg" id="successMsg">
-  <h2>¡Ya estás<br><em>en la lista!</em></h2>
-  <p>Gracias por contarme sobre ti. Serás la primera en saber cuándo empezamos — y recibirás La Pausa en tu email.</p>
-  <a href="/">Volver a LARŌ</a>
+<div class="success-msg" id="success-msg">
+  <div class="success-icon"></div>
+  <h2>Ya estás<br><em>en la lista.</em></h2>
+  <p>Te avisaré en cuanto abran nuevas plazas.<br>
+  Mientras, suscríbete a <strong>La Pausa</strong> y empieza a conocer tu piel desde dentro.</p>
+  <a href="/" class="btn-back">Volver a LARŌ</a>
 </div>
 
 <footer>
@@ -346,30 +238,53 @@
 </footer>
 
 <script>
-  const paso1 = document.getElementById('paso1');
-  const successMsg = document.getElementById('successMsg');
+  const form = document.getElementById('waitlist-form');
+  const mainContent = document.getElementById('main-content');
+  const successMsg = document.getElementById('success-msg');
+  const errorMsg = document.getElementById('error-msg');
+  const btn = document.getElementById('btn-submit');
 
-  document.getElementById('form1').addEventListener('submit', async (e) => {
+  if (window.location.search.includes('ok=1')) {
+    mainContent.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = document.getElementById('btn1');
+    errorMsg.style.display = 'none';
     btn.disabled = true;
-    btn.textContent = 'Un momento...';
+    btn.textContent = 'Enviando…';
 
-    const fd = new FormData(e.target);
     try {
-      const kitData = new FormData();
-      kitData.append('email_address', fd.get('email'));
-      kitData.append('fields[first_name]', fd.get('nombre'));
-      await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
+      const formData = new FormData(form);
+      formData.append('_subject', 'Nueva inscripción lista de espera LARŌ');
+
+      const res = await fetch('https://formspree.io/f/mqevrpgq', {
         method: 'POST',
-        body: kitData,
+        body: formData,
         headers: { 'Accept': 'application/json' }
       });
-    } catch (_) {}
 
-    paso1.style.display = 'none';
-    successMsg.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!res.ok) throw new Error();
+
+      // Suscripción a La Pausa en Kit (no bloqueante)
+      fetch('https://app.kit.com/forms/9558956/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email_address: document.getElementById('email').value,
+          first_name: document.getElementById('nombre').value,
+        }),
+      }).catch(() => {});
+
+      mainContent.style.display = 'none';
+      successMsg.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (_) {
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Apuntarme a la lista →';
+    }
   });
 </script>
 </body>
