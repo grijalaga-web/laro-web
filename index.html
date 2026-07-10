@@ -646,8 +646,6 @@
       <a href="#" onclick="toggleDropdown(event)">Rituales</a>
       <div class="dropdown-menu">
         <a href="#" onclick="openModal('asesoria')">Asesoría 1:1 <span class="badge-pronto">Sin plazas</span></a>
-        <a href="#" onclick="openModal('curso')">Curso <span class="badge-pronto">Próximamente</span></a>
-        <a href="#" onclick="openModal('podcast')">Podcast <span class="badge-pronto">Próximamente</span></a>
         <a href="#" onclick="openModal('talleres')">Talleres presenciales <span class="badge-pronto">Fechas por definir</span></a>
       </div>
     </div>
@@ -669,10 +667,6 @@
   <div class="mobile-divider"></div>
   <a href="#" onclick="toggleMobileMenu();openModal('asesoria')">Asesoría 1:1</a>
   <span class="mobile-pronto">Sin plazas · Lista de espera abierta</span>
-  <a href="#" onclick="toggleMobileMenu();openModal('curso')">Curso</a>
-  <span class="mobile-pronto">Próximamente</span>
-  <a href="#" onclick="toggleMobileMenu();openModal('podcast')">Podcast</a>
-  <span class="mobile-pronto">Próximamente</span>
   <a href="#" onclick="toggleMobileMenu();openModal('talleres')">Talleres presenciales</a>
   <span class="mobile-pronto">Fechas por definir</span>
   <div class="mobile-divider"></div>
@@ -693,40 +687,16 @@
   </div>
 </div>
 
-<!-- MODAL CURSO -->
-<div class="modal" id="modal-curso">
-  <div class="modal-inner">
-    <button class="modal-close" onclick="closeModal('curso')">×</button>
-    <span class="modal-badge">Próximamente</span>
-    <h2>Curso <em>de piel</em></h2>
-    <p>Aprende a entender tu piel desde la base. Ingredientes, cómo leer un INCI y cómo construir una rutina que funcione para tu vida real.</p>
-    <p>Con base científica, sin tecnicismos innecesarios. Para que nunca más tengas que fiarte de lo que te dice un anuncio.</p>
-    <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('curso')">Apuntarme a la lista de espera</a>
-  </div>
-</div>
-
-<!-- MODAL PODCAST -->
-<div class="modal" id="modal-podcast">
-  <div class="modal-inner">
-    <button class="modal-close" onclick="closeModal('podcast')">×</button>
-    <span class="modal-badge">Próximamente</span>
-    <h2><em>Podcast</em></h2>
-    <p>Una serie de audios sobre lo que nadie te explica sobre tu piel. Episodios cortos, con rigor científico y sin rodeos.</p>
-    <p>Para escuchar mientras te cuidas, en el metro o cuando tengas diez minutos. Conocimiento real, en formato accesible.</p>
-    <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('podcast')">Apuntarme a la lista de espera</a>
-  </div>
-</div>
-
 <!-- MODAL TALLERES -->
 <div class="modal" id="modal-talleres">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal('talleres')">×</button>
     <span class="modal-badge">Próximas fechas por definir</span>
     <h2>Talleres <em>presenciales</em></h2>
-    <p>Una experiencia con las manos en la piel. Sarai guía el taller con joyas de tocador — gua sha, ventosas de cupping, cepillos de cepillado en seco, champiñones de cuarzo — y enseña el masaje facial paso a paso.</p>
-    <p>No es una clase magistral. Es un rato para aprender haciendo, con tiempo de sobra para sentir cómo responde tu piel a cada técnica. Cada asistente se lleva un dossier imprimible para seguir practicando en casa.</p>
-    <p>Las fechas todavía no están cerradas. Apúntate y serás la primera en saberlo.</p>
-    <a href="/lista-de-espera" class="btn-primary" onclick="closeModal('talleres')">Avisarme de las próximas fechas</a>
+    <p>Un taller pequeño, con espacio para entender. Empezamos por la piel: qué es, cómo funciona, por qué hace lo que hace. La misma base científica del ebook <em>Entiende tu piel</em>, explicada en voz alta, con tiempo para preguntar y conectar con lo que ves en el espejo cada mañana.</p>
+    <p>La segunda parte es práctica: Sarai enseña técnicas de masaje facial y el uso de las joyas del tocador — gua sha, ventosas, cepillado en seco — como herramientas de ritual, no como tendencia. Cada asistente se lleva un dossier para seguir practicando en casa.</p>
+    <p>Grupos reducidos. Fecha y lugar por confirmar.</p>
+    <a href="/calendario" class="btn-primary" onclick="closeModal('talleres')">Ver fechas disponibles</a>
   </div>
 </div>
 
