@@ -45,10 +45,12 @@
   }
 
   .test-grupo { margin-bottom: 20px; }
-  .test-grupo label {
+  .test-grupo > label {
     display: block; font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;
   }
   .test-grupo .sub { font-weight: 300; color: var(--muted); font-size: 0.82rem; display: block; margin-top: 2px; }
+  .opcion-item { font-weight: 300; }
+  .opcion-item span { font-weight: 300; font-size: 0.85rem; }
 
   input[type=text], input[type=email], select, textarea {
     width: 100%; padding: 12px 16px;
@@ -403,20 +405,32 @@
   <!-- RESULTADO -->
   <div class="resultado" id="resultado">
     <h2 class="resultado-titulo">Listo. <em>Gracias por tu tiempo.</em></h2>
-    <p class="resultado-sub">He recibido tus respuestas. Ahora solo tienes que enviarlas a Sarai usando el botón de abajo. Nos vemos en la sesión.</p>
+    <p class="resultado-sub">Sigue estos dos pasos para enviarme tus respuestas:</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px">
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid var(--pink);background:white">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--garnet);line-height:1;flex-shrink:0">1</span>
+        <div>
+          <p style="font-weight:700;font-size:0.88rem;margin-bottom:6px">Copia tu código</p>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Pulsa el botón y queda guardado en tu portapapeles.</p>
+          <button class="btn-copiar" onclick="copiarCodigo()" id="btn-copiar-main">Copiar código</button>
+          <p class="copiado" id="msg-copiado">✓ Copiado</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid var(--pink);background:white">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--garnet);line-height:1;flex-shrink:0">2</span>
+        <div>
+          <p style="font-weight:700;font-size:0.88rem;margin-bottom:6px">Envíame el email</p>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Se abre un email a Sarai. <strong style="color:var(--dark)">Pega el código copiado</strong> donde indica el texto y envíalo.</p>
+          <a class="btn-email" id="btn-mailto" href="#">Abrir email</a>
+        </div>
+      </div>
+    </div>
 
     <div class="codigo-bloque">
-      <span class="codigo-label">Código de importación</span>
+      <span class="codigo-label">Tu código (por si necesitas copiarlo de nuevo)</span>
       <div class="codigo-text" id="codigo-output"></div>
     </div>
-    <button class="btn-copiar" onclick="copiarCodigo()">Copiar código</button>
-    <a class="btn-email" id="btn-mailto" href="#">Enviar por email a Sarai</a>
-    <p class="copiado" id="msg-copiado">Código copiado al portapapeles</p>
-
-    <hr class="divider">
-    <p style="font-size:0.82rem;line-height:1.7;color:var(--muted)">
-      Si el botón de email no abre tu aplicación de correo, copia el código de arriba y envíalo manualmente a <strong>hola@larō.com</strong> con el asunto <em>Test de piel — [tu nombre]</em>.
-    </p>
   </div>
 
   <footer-test>LARŌ · Organic Skin Rituals · hola@larō.com</footer-test>
@@ -468,40 +482,12 @@ form.addEventListener('submit', function(e) {
   const codigo = btoa(unescape(encodeURIComponent(json)));
   document.getElementById('codigo-output').textContent = codigo;
 
-  // Resumen legible para el email
-  const lineas = [
-    `Test de piel LARŌ — ${datos.nombre}`,
-    `Email: ${datos.email}`,
-    datos.edad ? `Edad: ${datos.edad}` : '',
-    '',
-    `Tipo de piel: ${datos.pieles.join(', ') || '—'}`,
-    `Afecciones: ${datos.afecciones.join(', ') || '—'}`,
-    datos.pielPreocupacion ? `Preocupación principal: ${datos.pielPreocupacion}` : '',
-    datos.alergias ? `Alergias: ${datos.alergias}` : '',
-    datos.medicacion ? `Medicación: ${datos.medicacion}` : '',
-    '',
-    `Ciclo: ${datos.ciclo.join(', ') || '—'}`,
-    datos.cicloObs ? `Ciclo obs: ${datos.cicloObs}` : '',
-    '',
-    `Digestivo — regularidad: ${datos.digRegularidad || '—'} | hinchazón: ${datos.digHinchazon || '—'}`,
-    datos.digIntolerancias ? `Intolerancias: ${datos.digIntolerancias}` : '',
-    '',
-    `Estrés: ${datos.estres || '—'} | Sueño: ${datos.sueno || '—'} | Agua: ${datos.agua || '—'}`,
-    '',
-    `Objetivos: ${datos.objetivos.join(', ') || '—'}`,
-    `Presupuesto: ${datos.presupuesto || '—'}`,
-    datos.rutina ? `Rutina actual: ${datos.rutina}` : '',
-    datos.notasIniciales ? `Notas libres: ${datos.notasIniciales}` : '',
-    '',
-    '— CÓDIGO DE IMPORTACIÓN —',
-    codigo,
-  ].filter(l => l !== undefined && l !== null);
-
-  const cuerpo = encodeURIComponent(lineas.join('\n'));
-  const asunto = encodeURIComponent(`Test de piel LARŌ — ${datos.nombre}`);
+  const asunto = encodeURIComponent(`Test de asesoría LARŌ — ${datos.nombre}`);
+  const cuerpo = encodeURIComponent(`Hola Sarai,\n\nAquí te mando el código de importación de mi test de piel.\n\n[PEGA AQUÍ EL CÓDIGO]\n\n${datos.nombre}`);
   document.getElementById('btn-mailto').href = `mailto:hola@larō.com?subject=${asunto}&body=${cuerpo}`;
 
   form.style.display = 'none';
+  document.querySelector('.test-header').style.display = 'none';
   resultado.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
