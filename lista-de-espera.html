@@ -187,7 +187,14 @@
   </div>
 
   <div class="form-wrap">
-    <form id="waitlist-form">
+    <!--
+      PARA ACTIVAR: ve a formspree.io, crea cuenta con grijalaga@gmail.com,
+      crea un formulario nuevo y sustituye TU_FORM_ID por el ID que te den.
+    -->
+    <form id="waitlist-form" action="https://formspree.io/f/TU_FORM_ID" method="POST">
+      <input type="hidden" name="_subject" value="Nueva inscripción lista de espera LARŌ">
+      <input type="hidden" name="_next" value="/lista-de-espera?ok=1">
+
       <div class="form-group">
         <label for="nombre">¿Cómo te llamas?</label>
         <input type="text" id="nombre" name="nombre"
@@ -211,7 +218,7 @@
 
       <div id="error-msg" class="error-msg">
         Algo no ha ido bien. Inténtalo de nuevo o escríbeme directamente a
-        <a href="mailto:hola@larō.com">hola@larō.com</a>.
+        <a href="mailto:grijalaga@gmail.com">grijalaga@gmail.com</a>.
       </div>
 
       <button type="submit" class="btn-submit" id="btn-submit">
@@ -256,30 +263,19 @@
     btn.textContent = 'Enviando…';
 
     try {
-      const formData = new FormData(form);
-      formData.append('_subject', 'Nueva inscripción lista de espera LARŌ');
-
-      const res = await fetch('https://formspree.io/f/mqevrpgq', {
+      const res = await fetch(form.action, {
         method: 'POST',
-        body: formData,
+        body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
 
-      if (!res.ok) throw new Error();
-
-      // Suscripción a La Pausa en Kit (no bloqueante)
-      fetch('https://app.kit.com/forms/9558956/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email_address: document.getElementById('email').value,
-          first_name: document.getElementById('nombre').value,
-        }),
-      }).catch(() => {});
-
-      mainContent.style.display = 'none';
-      successMsg.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (res.ok) {
+        mainContent.style.display = 'none';
+        successMsg.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error();
+      }
     } catch (_) {
       errorMsg.style.display = 'block';
       btn.disabled = false;
