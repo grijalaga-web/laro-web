@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LARŌ · Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream:  #F9F7F6;
+    --pink:   #E9D9D6;
+    --muted:  #8A7070;
+    --dark:   #2A1A1B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F0ECEA; font-family: 'Lato', sans-serif; color: var(--dark); min-height: 100vh; }
+
+  header {
+    background: var(--garnet); padding: 0 40px; height: 56px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 18pt; font-weight: 300; letter-spacing: 0.4em; color: var(--cream); }
+  .header-tag { font-size: 7pt; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(249,247,246,0.45); }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .top-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: 26pt; font-weight: 300; font-style: italic; color: var(--dark); line-height: 1.1; }
+  .page-title span { color: var(--garnet); }
+  .page-date { font-size: 7.5pt; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  .tools-row { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+  .tool-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; font-family: 'Lato', sans-serif;
+    font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer; transition: opacity 0.15s;
+  }
+  .tool-btn:hover { opacity: 0.8; }
+  .btn-dark { background: var(--dark); color: var(--cream); }
+  .btn-outline { background: transparent; color: var(--garnet); border: 1px solid var(--garnet); }
+
+  .section-label {
+    font-size: 7pt; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--pink);
+  }
+
+  /* Glosario de métricas */
+  .glosario {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .metrica-card {
+    background: white; padding: 18px 20px;
+    box-shadow: 0 1px 6px rgba(42,26,27,0.07);
+    border-left: 3px solid var(--pink);
+  }
+  .metrica-card.buena { border-left-color: #4A7B5A; }
+  .metrica-card.atencion { border-left-color: #D4A017; }
+  .metrica-nombre { font-size: 7pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--garnet); margin-bottom: 4px; }
+  .metrica-en { font-size: 6.5pt; color: var(--muted); margin-bottom: 8px; }
+  .metrica-desc { font-size: 8.5pt; line-height: 1.65; color: var(--dark); }
+  .metrica-referencia { font-size: 7.5pt; color: var(--muted); margin-top: 6px; font-style: italic; }
+
+  /* Plausible embed */
+  .plausible-wrap {
+    background: white; padding: 4px;
+    box-shadow: 0 2px 20px rgba(42,26,27,0.07); margin-bottom: 48px;
+  }
+
+  /* Clarity */
+  .clarity-card {
+    background: white; padding: 28px 32px;
+    box-shadow: 0 2px 20px rgba(42,26,27,0.07);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .clarity-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 300; color: var(--dark); margin-bottom: 6px; }
+  .clarity-info p { font-size: 8.5pt; color: var(--muted); line-height: 1.7; max-width: 500px; }
+
+  .glosario-clarity { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px; }
+
+  .nota { padding: 14px 18px; background: rgba(84,11,14,0.05); border-left: 3px solid var(--garnet); font-size: 7.5pt; color: var(--muted); line-height: 1.7; }
+  .nota strong { color: var(--dark); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">LARŌ</span>
+  <span class="header-tag">Dashboard privado</span>
+</header>
+
+<div class="main">
+
+  <div class="top-row">
+    <h1 class="page-title">Métricas<br><span>de la web</span></h1>
+    <p class="page-date" id="fecha"></p>
+  </div>
+
+  <div class="tools-row">
+    <a class="tool-btn btn-dark" href="https://clarity.microsoft.com/projects/view/xknkh18d8a/dashboard" target="_blank">↗ Abrir Clarity — mapas de calor</a>
+    <a class="tool-btn btn-outline" href="https://plausible.io/xn--lar-sxa.com" target="_blank">↗ Plausible completo</a>
+  </div>
+
+  <!-- ── PLAUSIBLE ── -->
+  <p class="section-label">Visitas y tráfico · Plausible</p>
+
+  <div class="glosario" style="margin-bottom:24px">
+    <div class="metrica-card">
+      <p class="metrica-nombre">Visitantes únicos</p>
+      <p class="metrica-en">Unique visitors</p>
+      <p class="metrica-desc">Personas distintas que entraron a la web. Si alguien entra 3 veces, cuenta como 1.</p>
+      <p class="metrica-referencia">Lo más importante: mide tu audiencia real.</p>
+    </div>
+    <div class="metrica-card">
+      <p class="metrica-nombre">Páginas vistas</p>
+      <p class="metrica-en">Pageviews</p>
+      <p class="metrica-desc">Total de veces que se cargó cualquier página. Siempre mayor que los visitantes únicos.</p>
+      <p class="metrica-referencia">Si es mucho mayor, la gente navega varias páginas = buena señal.</p>
+    </div>
+    <div class="metrica-card atencion">
+      <p class="metrica-nombre">Tasa de rebote</p>
+      <p class="metrica-en">Bounce rate</p>
+      <p class="metrica-desc">% de personas que entraron y se fueron sin hacer nada más. Cuanto más bajo, mejor.</p>
+      <p class="metrica-referencia">Por encima del 70% hay que revisar. Normal en webs de una sola página: 50–60%.</p>
+    </div>
+    <div class="metrica-card buena">
+      <p class="metrica-nombre">Tiempo en la web</p>
+      <p class="metrica-en">Visit duration</p>
+      <p class="metrica-desc">Cuánto tiempo se queda de media cada visita. Más tiempo = más interés en el contenido.</p>
+      <p class="metrica-referencia">Más de 1 minuto es bueno. Más de 2 minutos es muy bueno.</p>
+    </div>
+    <div class="metrica-card">
+      <p class="metrica-nombre">Fuentes de tráfico</p>
+      <p class="metrica-en">Sources</p>
+      <p class="metrica-desc">De dónde viene la gente: Instagram, TikTok, Google, directo (han escrito la URL) u otras webs.</p>
+      <p class="metrica-referencia">Te dice qué red social te funciona mejor.</p>
+    </div>
+    <div class="metrica-card">
+      <p class="metrica-nombre">Páginas más visitadas</p>
+      <p class="metrica-en">Top pages</p>
+      <p class="metrica-desc">Qué secciones de tu web abre más la gente: inicio, test de barrera, lista de espera…</p>
+      <p class="metrica-referencia">Si la lista de espera tiene muchas visitas pero pocas altas, el CTA falla.</p>
+    </div>
+  </div>
+
+  <div class="plausible-wrap">
+    <iframe
+      plausible-embed
+      src="https://plausible.io/share/xn--lar-sxa.com?auth=9mp_Kjp1ORnD8qzChJfJ8&embed=true&theme=light&background=white"
+      scrolling="no" frameborder="0" loading="lazy"
+      style="width:1px;min-width:100%;height:1600px">
+    </iframe>
+    <script async src="https://plausible.io/js/embed.host.js"></script>
+  </div>
+
+  <!-- ── CLARITY ── -->
+  <p class="section-label">Comportamiento real · Microsoft Clarity</p>
+
+  <div class="glosario glosario-clarity">
+    <div class="metrica-card">
+      <p class="metrica-nombre">Mapa de calor</p>
+      <p class="metrica-en">Heatmap</p>
+      <p class="metrica-desc">Muestra dónde hace clic la gente y hasta dónde baja con el scroll. Las zonas más activas aparecen en rojo/naranja.</p>
+      <p class="metrica-referencia">Ideal para ver si la gente llega al botón de lista de espera.</p>
+    </div>
+    <div class="metrica-card">
+      <p class="metrica-nombre">Grabaciones de sesión</p>
+      <p class="metrica-en">Session recordings</p>
+      <p class="metrica-desc">Vídeos reales (anonimizados) de cómo navega cada persona por tu web. Ves exactamente dónde se para y dónde se va.</p>
+      <p class="metrica-referencia">Muy útil cuando algo no funciona y no sabes por qué.</p>
+    </div>
+    <div class="metrica-card atencion">
+      <p class="metrica-nombre">Rage clicks</p>
+      <p class="metrica-en">Rage clicks</p>
+      <p class="metrica-desc">Cuando alguien hace clic varias veces seguidas en el mismo sitio con frustración. Señal de que algo no funciona o no es clicable siendo que parece que sí.</p>
+      <p class="metrica-referencia">Si aparece mucho en algún elemento, hay que revisarlo.</p>
+    </div>
+    <div class="metrica-card atencion">
+      <p class="metrica-nombre">Dead clicks</p>
+      <p class="metrica-en">Dead clicks</p>
+      <p class="metrica-desc">Clics en zonas que no hacen nada. La gente cree que algo es interactivo y no lo es.</p>
+      <p class="metrica-referencia">Puede indicar que hay texto o imagen que parece un botón pero no lo es.</p>
+    </div>
+  </div>
+
+  <div class="clarity-card">
+    <div class="clarity-info">
+      <h3>Abrir Clarity para ver mapas y grabaciones</h3>
+      <p>Los datos tardan entre 2 y 24 horas en aparecer después de la instalación. A partir de mañana ya tendrás las primeras sesiones grabadas y los mapas de calor disponibles.</p>
+    </div>
+    <a class="tool-btn btn-dark" href="https://clarity.microsoft.com/projects/view/xknkh18d8a/dashboard" target="_blank">Abrir Clarity →</a>
+  </div>
+
+  <div class="nota">
+    <strong>Página privada.</strong> No está enlazada desde ningún sitio de la web ni indexada en Google. Acceso solo tecleando la dirección directamente. No compartir la URL.
+  </div>
+
+</div>
+
+<script>
+  const d = new Date();
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById('fecha').textContent = d.toLocaleDateString('es-ES', opts);
+</script>
+
+</body>
+</html>
