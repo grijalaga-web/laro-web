@@ -30,6 +30,18 @@
   header a { display: inline-block; }
   header img { height: 160px; width: auto; mix-blend-mode: multiply; }
 
+  .back-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .back-link a {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link a:hover { color: var(--garnet); }
+
   .divider { width: 1px; height: 48px; background: var(--garnet); margin: 40px auto; }
 
   /* HERO */
@@ -187,6 +199,7 @@
 <header>
   <a href="/"><img src="narciso.laro.png" alt="LARŌ Organic Skin Rituals"></a>
 </header>
+<div class="back-link"><a href="/">← Volver a LARŌ</a></div>
 
 <div class="hero">
   <span class="page-label">Asesoría 1:1</span>
