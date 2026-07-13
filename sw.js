@@ -1,8 +1,10 @@
-const CACHE = 'laro-v11';
+const CACHE = 'laro-v13';
 const URLS = [
   '/',
   '/index.html',
   '/lista-de-espera.html',
+  '/asesoria.html',
+  '/talleres.html',
   '/calendario.html',
   '/narciso.laro.png',
   '/laro-flower.png'
