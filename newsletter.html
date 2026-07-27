@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Pausa · Newsletter de LARŌ</title>
+<meta name="description" content="Educación sobre piel que vale la pena leer — la newsletter de LARŌ Organic Skin Rituals.">
+<link rel="icon" type="image/png" href="laro-flower.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream: #F9F7F6;
+    --pink: #E9D9D6;
+    --dark: #2A1A1B;
+    --text: #3D2B2C;
+    --muted: #8A7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 48px 24px 0;
+  }
+  header a { display: inline-block; }
+  header img {
+    height: 160px; width: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .page-hero {
+    text-align: center;
+    padding: 48px 24px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .page-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet);
+    margin-bottom: 20px; display: block;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300; line-height: 1.2; color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .page-title em { font-style: italic; color: var(--garnet); }
+  .page-sub {
+    font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+  }
+  .divider {
+    width: 1px; height: 48px;
+    background: var(--garnet);
+    margin: 32px auto;
+  }
+
+  .form-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    background: white;
+    border: 1px solid var(--pink);
+    border-radius: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  input:focus { border-color: var(--garnet); }
+
+  .btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-submit:hover { background: var(--dark); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .privacy-note {
+    margin-top: 16px;
+    font-size: 0.7rem; color: var(--muted); text-align: center; line-height: 1.6;
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 24px 24px 80px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .success-icon {
+    width: 1px; height: 52px;
+    background: var(--garnet);
+    margin: 0 auto 28px;
+  }
+  .success-msg h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+    color: var(--dark); margin-bottom: 16px;
+  }
+  .success-msg h2 em { color: var(--garnet); font-style: italic; }
+  .success-msg p {
+    font-size: 0.95rem; line-height: 1.8;
+    color: var(--muted);
+  }
+
+  footer {
+    background: var(--dark); color: rgba(249,247,246,0.4);
+    text-align: center; padding: 32px 24px;
+    font-size: 0.72rem; letter-spacing: 0.15em;
+  }
+  footer span { color: rgba(233,217,214,0.6); }
+  footer a { color: rgba(249,247,246,0.4); text-decoration: none; }
+  footer a:hover { color: var(--pink); }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/">
+    <img src="narciso.laro.png" alt="LARŌ Organic Skin Rituals">
+  </a>
+</header>
+
+<div id="main-content">
+  <div class="page-hero">
+    <span class="page-label">La Pausa</span>
+    <h1 class="page-title">Educación sobre piel<br>que <em>vale la pena leer.</em></h1>
+    <p class="page-sub">Ingredientes que funcionan, rituales que encajan en tu vida real y la
+    ciencia detrás de lo que te pones en la piel — explicado por alguien que lo ha estudiado
+    de verdad.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="form-wrap">
+    <form id="newsletterForm">
+      <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="given-name">
+      <input type="email" name="email" placeholder="Tu email" required autocomplete="email">
+      <button type="submit" class="btn-submit" id="btn-submit">Suscribirme →</button>
+      <p class="privacy-note">Sin spam. Sin cesión a terceros. Puedes darte de baja cuando quieras.</p>
+    </form>
+  </div>
+</div>
+
+<div class="success-msg" id="success-msg">
+  <div class="success-icon"></div>
+  <h2>Ya estás<br><em>dentro.</em></h2>
+  <p>Bienvenida a La Pausa. Revisa tu email —el primer número está a punto de llegar.</p>
+</div>
+
+<footer>
+  <p><a href="/">LARŌ · Organic Skin Rituals</a> · <span>Tu piel, tu ritual.</span></p>
+</footer>
+
+<script>
+  const form = document.getElementById('newsletterForm');
+  const mainContent = document.getElementById('main-content');
+  const successMsg = document.getElementById('success-msg');
+  const btn = document.getElementById('btn-submit');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    const fd = new FormData(form);
+    const kitData = new FormData();
+    kitData.append('email_address', fd.get('email'));
+    kitData.append('fields[first_name]', fd.get('nombre'));
+    try {
+      await fetch('https://app.convertkit.com/forms/9558956/subscriptions', {
+        method: 'POST',
+        body: kitData,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (_) {}
+    mainContent.style.display = 'none';
+    successMsg.style.display = 'block';
+  });
+</script>
+</body>
+</html>
