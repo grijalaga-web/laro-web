@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu guía · LARŌ</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="laro-flower.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream: #F9F7F6;
+    --pink: #E9D9D6;
+    --dark: #2A1A1B;
+    --text: #3D2B2C;
+    --muted: #8A7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 48px 24px 0;
+  }
+  header img {
+    height: 140px; width: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .page-hero {
+    text-align: center;
+    padding: 32px 24px 8px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .page-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet);
+    margin-bottom: 18px; display: block;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.7rem, 5vw, 2.4rem);
+    font-weight: 300; line-height: 1.25; color: var(--dark);
+    margin-bottom: 16px;
+  }
+  .page-title em { font-style: italic; color: var(--garnet); }
+  .page-sub {
+    font-size: 0.92rem; line-height: 1.8; color: var(--muted);
+  }
+  .divider {
+    width: 1px; height: 40px;
+    background: var(--garnet);
+    margin: 28px auto;
+  }
+
+  .form-wrap {
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    background: white;
+    border: 1px solid var(--pink);
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--text);
+    outline: none;
+  }
+  input:focus { border-color: var(--garnet); }
+
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    border: none; cursor: pointer;
+  }
+  .btn-submit:hover { background: var(--dark); }
+
+  .error-msg {
+    display: none;
+    margin-top: 14px;
+    font-size: 0.82rem; color: var(--garnet); text-align: center;
+  }
+
+  .success-wrap {
+    display: none;
+    text-align: center;
+    padding: 20px 24px 70px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .success-icon { width: 1px; height: 44px; background: var(--garnet); margin: 0 auto 26px; }
+  .success-wrap h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--dark); margin-bottom: 14px;
+  }
+  .success-wrap h2 em { color: var(--garnet); font-style: italic; }
+  .success-wrap p { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 26px; }
+  .btn-open {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none;
+  }
+  .btn-open:hover { background: var(--dark); }
+  .pdf-hint {
+    margin-top: 22px;
+    font-size: 0.76rem; color: var(--muted); line-height: 1.7;
+  }
+
+  footer {
+    background: var(--dark); color: rgba(249,247,246,0.4);
+    text-align: center; padding: 28px 24px;
+    font-size: 0.7rem; letter-spacing: 0.15em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="narciso.laro.png" alt="LARŌ Organic Skin Rituals">
+</header>
+
+<div id="gate">
+  <div class="page-hero">
+    <span class="page-label">Un regalo para ti</span>
+    <h1 class="page-title">Tu guía está<br><em>casi lista.</em></h1>
+    <p class="page-sub">Introduce la contraseña que te he enviado para acceder.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="form-wrap">
+    <form id="gate-form">
+      <input type="password" id="pw" placeholder="Contraseña" autocomplete="off" required>
+      <button type="submit" class="btn-submit">Acceder →</button>
+      <p class="error-msg" id="error-msg">Esa contraseña no es correcta. Revisa el email o el mensaje donde te la mandé.</p>
+    </form>
+  </div>
+</div>
+
+<div class="success-wrap" id="success-wrap">
+  <div class="success-icon"></div>
+  <h2>Aquí<br><em>tienes.</em></h2>
+  <p>Mis solares de filtro físico favoritos, verificados uno a uno.</p>
+  <a href="../documentos/guia-solares-minerales.html" class="btn-open" target="_blank">Abrir la guía →</a>
+  <p class="pdf-hint">¿Quieres guardarla en PDF? Una vez abierta, usa <strong>Cmd/Ctrl + P</strong> →
+  "Guardar como PDF" desde el menú de impresión de tu navegador.</p>
+</div>
+
+<footer>
+  <p>LARŌ · Organic Skin Rituals</p>
+</footer>
+
+<script>
+  // Hash SHA-256 de la contraseña — para cambiarla, genera el hash nuevo de tu contraseña
+  // (por ejemplo pidiéndomelo a mí) y sustituye el valor de abajo.
+  const CORRECT_HASH = "746f5803503e748f2f487f3ddfa5f0b39517f1ba048ef7d2e03d60cac517f2c3";
+
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  document.getElementById('gate-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = document.getElementById('pw').value.trim();
+    const hash = await sha256(pw);
+    if (hash === CORRECT_HASH) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('success-wrap').style.display = 'block';
+      try { sessionStorage.setItem('laro_guia_ok', '1'); } catch (_) {}
+    } else {
+      document.getElementById('error-msg').style.display = 'block';
+    }
+  });
+
+  // Si ya se validó en esta sesión de navegador, saltar directamente
+  try {
+    if (sessionStorage.getItem('laro_guia_ok') === '1') {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('success-wrap').style.display = 'block';
+    }
+  } catch (_) {}
+</script>
+</body>
+</html>
