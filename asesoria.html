@@ -89,9 +89,12 @@
   /* FOTO EDITORIAL */
   .foto-editorial { margin: 0 0 48px; }
   .foto-editorial img {
-    width: 100%; display: block; height: auto;
+    width: 100%; display: block; height: 520px;
+    object-fit: cover;
     filter: sepia(6%) contrast(1.03) brightness(1.01);
   }
+  .foto-editorial--retrato img { object-position: center 24%; }
+  .foto-editorial--bowl img { object-position: center bottom; }
 
   /* PASOS */
   .paso {
@@ -222,7 +225,7 @@
     <p>Llevas tiempo buscando el producto correcto.<br><em>Puede que lo que tu piel necesite sea que alguien sepa leerla.</em></p>
   </div>
 
-  <div class="foto-editorial">
+  <div class="foto-editorial foto-editorial--retrato">
     <img src="sarai-retrato-asesoria.jpg" alt="Sarai Orrego, fundadora de LARŌ">
   </div>
 
@@ -301,7 +304,7 @@
     </div>
   </div>
 
-  <div class="foto-editorial">
+  <div class="foto-editorial foto-editorial--bowl">
     <img src="sarai-mascarilla-bowl.jpg" alt="Preparación de una mascarilla natural en un bowl de madera">
   </div>
 
