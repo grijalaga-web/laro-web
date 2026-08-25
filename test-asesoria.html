@@ -170,6 +170,10 @@
         <label>Edad</label>
         <input type="text" id="t-edad" placeholder="Ej: 34">
       </div>
+      <div class="test-grupo">
+        <label>Dirección de envío <span class="sub">Aquí te llegarán las muestras después de la sesión.</span></label>
+        <textarea id="t-direccion" placeholder="Calle, número, piso, código postal, ciudad" rows="2"></textarea>
+      </div>
     </div>
 
     <div class="test-seccion">
@@ -503,6 +507,7 @@ form.addEventListener('submit', function(e) {
     nombre:           val('t-nombre'),
     email:            val('t-email'),
     edad:             val('t-edad'),
+    direccion:        val('t-direccion'),
     pieles:           checks('piel'),
     pielManana:       val('t-manana'),
     pielTarde:        val('t-tarde'),
