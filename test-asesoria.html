@@ -174,6 +174,10 @@
         <label>Dirección de envío <span class="sub">Aquí te llegarán las muestras después de la sesión.</span></label>
         <textarea id="t-direccion" placeholder="Calle, número, piso, código postal, ciudad" rows="2"></textarea>
       </div>
+      <div class="test-grupo">
+        <label>¿Vienes referido por alguien? <span class="sub">Opcional.</span></label>
+        <input type="text" id="t-referido" placeholder="Nombre de quien te ha recomendado">
+      </div>
     </div>
 
     <div class="test-seccion">
@@ -508,6 +512,7 @@ form.addEventListener('submit', function(e) {
     email:            val('t-email'),
     edad:             val('t-edad'),
     direccion:        val('t-direccion'),
+    referido:         val('t-referido'),
     pieles:           checks('piel'),
     pielManana:       val('t-manana'),
     pielTarde:        val('t-tarde'),
