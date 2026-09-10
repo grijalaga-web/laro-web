@@ -1,4 +1,4 @@
-const CACHE = 'laro-v46';
+const CACHE = 'laro-v49';
 const URLS = [
   '/',
   '/index.html',
