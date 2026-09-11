@@ -361,6 +361,15 @@
         <textarea id="t-rutina" placeholder="Ej: Agua micelar Bioderma por la mañana · Crema hidratante Avène · Noche: lo mismo + aceite de argán..."></textarea>
       </div>
       <div class="test-grupo">
+        <label>¿Te maquillas a diario?</label>
+        <select id="t-maquillaje">
+          <option value="">— Selecciona —</option>
+          <option value="si_diario">Sí, todos los días</option>
+          <option value="a_veces">A veces</option>
+          <option value="no_casi_nunca">No, casi nunca</option>
+        </select>
+      </div>
+      <div class="test-grupo">
         <label>¿Qué tipo de cosmética quieres usar?</label>
         <select id="t-tipo-cosmetica">
           <option value="">— Selecciona —</option>
@@ -531,6 +540,7 @@ form.addEventListener('submit', function(e) {
     sueno:            val('t-sueno'),
     agua:             val('t-agua'),
     rutina:           val('t-rutina'),
+    maquillajeDiario: val('t-maquillaje'),
     tipoCosmetica:    val('t-tipo-cosmetica'),
     tiempoRutina:     val('t-tiempo'),
     objetivos:        checks('objetivos'),
