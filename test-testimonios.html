@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonio y feedback · LARŌ</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --garnet: #540B0E;
+    --cream:  #F9F7F6;
+    --pink:   #E9D9D6;
+    --dark:   #2A1A1B;
+    --text:   #3D2B2C;
+    --muted:  #8A7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--text); font-family: 'Lato', sans-serif; font-weight: 300; }
+
+  .test-wrap { max-width: 680px; margin: 0 auto; padding: 64px 32px 100px; }
+
+  .test-logo { text-align: center; margin-bottom: 48px; }
+  .test-logo img { height: 120px; mix-blend-mode: multiply; }
+
+  .test-header { text-align: center; margin-bottom: 48px; }
+  .test-eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--garnet); margin-bottom: 16px;
+  }
+  .test-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; line-height: 1.2; color: var(--dark); margin-bottom: 16px;
+  }
+  .test-titulo em { font-style: italic; color: var(--garnet); }
+  .test-intro { font-size: 0.95rem; line-height: 1.8; color: var(--muted); }
+
+  .test-seccion { margin-bottom: 40px; }
+  .test-seccion-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--garnet);
+    border-bottom: 1px solid var(--pink); padding-bottom: 8px; margin-bottom: 20px;
+  }
+
+  .test-grupo { margin-bottom: 20px; }
+  .test-grupo > label {
+    display: block; font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;
+  }
+  .test-grupo .sub { font-weight: 300; color: var(--muted); font-size: 0.82rem; display: block; margin-top: 2px; }
+  .opcion-item { font-weight: 300; }
+  .opcion-item span { font-weight: 300; font-size: 0.85rem; }
+
+  input[type=text], input[type=email], select, textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid var(--pink); background: white; color: var(--text);
+    font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 300;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--garnet); }
+  textarea { min-height: 80px; resize: vertical; }
+  select { cursor: pointer; }
+
+  .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .opciones-lista { display: flex; flex-direction: column; gap: 8px; }
+  .opcion-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border: 1px solid var(--pink); background: white;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  .opcion-item:hover { border-color: var(--garnet); }
+  .opcion-item input[type=checkbox], .opcion-item input[type=radio] {
+    width: auto; padding: 0; border: none; accent-color: var(--garnet);
+  }
+  .opcion-item span { font-size: 0.85rem; }
+
+  .btn-enviar {
+    display: block; width: 100%; padding: 16px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.3s; margin-top: 40px;
+  }
+  .btn-enviar:hover { background: var(--dark); }
+
+  /* Resultado */
+  .resultado { display: none; }
+  .resultado-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; line-height: 1.3; color: var(--dark); margin-bottom: 12px;
+  }
+  .resultado-titulo em { font-style: italic; color: var(--garnet); }
+  .resultado-sub { font-size: 0.9rem; line-height: 1.7; color: var(--muted); margin-bottom: 32px; }
+  .codigo-bloque { background: var(--dark); padding: 20px 24px; border-radius: 2px; margin-bottom: 24px; }
+  .codigo-label {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 8px; display: block;
+  }
+  .codigo-text { font-family: monospace; font-size: 0.75rem; color: var(--cream); word-break: break-all; line-height: 1.6; }
+  .btn-copiar {
+    display: inline-block; padding: 10px 24px;
+    background: transparent; color: var(--garnet);
+    font-family: 'Lato', sans-serif; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid var(--garnet); cursor: pointer; transition: all 0.2s;
+    margin-right: 12px; margin-top: 12px;
+  }
+  .btn-copiar:hover { background: var(--garnet); color: var(--cream); }
+  .btn-email {
+    display: inline-block; padding: 10px 24px;
+    background: var(--garnet); color: var(--cream);
+    font-family: 'Lato', sans-serif; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.2s;
+    margin-top: 12px; text-decoration: none;
+  }
+  .btn-email:hover { background: var(--dark); }
+  .copiado { color: #2E7D32; font-size: 0.8rem; margin-top: 8px; display: none; }
+
+  footer-test {
+    display: block; text-align: center; margin-top: 48px;
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 600px) {
+    .test-wrap { padding: 40px 20px 80px; }
+    .opciones-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="test-wrap">
+
+  <div class="test-logo">
+    <img src="narciso.laro.png" alt="LARŌ">
+  </div>
+
+  <div class="test-header">
+    <p class="test-eyebrow">Al cerrar tu asesoría</p>
+    <h1 class="test-titulo">Cuéntame cómo<br>te ha <em>ido</em></h1>
+    <p class="test-intro">Han pasado tus tres semanas de ritual. Antes de cerrar tu asesoría me encantaría saber cómo ha sido — me ayuda a seguir mejorando el proceso y, si te apetece, a compartir tu experiencia con otras personas que estén dudando. Tarda menos de 2 minutos.</p>
+  </div>
+
+  <div id="aviso-borrador" style="display:none;background:#F9F0EE;border-left:3px solid var(--garnet);padding:12px 16px;margin-bottom:20px;font-size:0.88rem;line-height:1.6;color:var(--dark)">
+    Hemos recuperado tus respuestas de una visita anterior — sigue por donde lo dejaste.
+  </div>
+
+  <form id="test-form">
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Sobre ti</p>
+      <div class="test-grupo">
+        <label>Tu nombre <span class="sub">Opcional — puedes dejarlo en blanco si prefieres.</span></label>
+        <input type="text" id="t-nombre">
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Tu experiencia</p>
+      <div class="test-grupo">
+        <label>En general, ¿cómo valorarías tu experiencia con la asesoría?</label>
+        <select id="t-valoracion">
+          <option value="">— Selecciona —</option>
+          <option value="excelente">Excelente</option>
+          <option value="muy_buena">Muy buena</option>
+          <option value="buena">Buena</option>
+          <option value="regular">Regular</option>
+          <option value="mala">No cumplió lo que esperaba</option>
+        </select>
+      </div>
+      <div class="test-grupo">
+        <label>En una frase, ¿qué le dirías a alguien que está dudando si hacer esta asesoría?</label>
+        <textarea id="t-frase" placeholder="Esta frase es la que más me ayuda a compartir con otras personas, si me das permiso más abajo..."></textarea>
+      </div>
+      <div class="test-grupo">
+        <label>¿Recomendarías esta asesoría a una amiga?</label>
+        <div class="opciones-lista">
+          <label class="opcion-item"><input type="radio" name="recomienda" value="si_seguro"><span>Sí, seguro</span></label>
+          <label class="opcion-item"><input type="radio" name="recomienda" value="probablemente"><span>Probablemente</span></label>
+          <label class="opcion-item"><input type="radio" name="recomienda" value="no_segura"><span>No estoy segura</span></label>
+          <label class="opcion-item"><input type="radio" name="recomienda" value="no"><span>No</span></label>
+        </div>
+      </div>
+      <div class="test-grupo">
+        <label>¿Puedo compartir lo que me cuentes aquí? <span class="sub">Nunca sin tu permiso explícito.</span></label>
+        <div class="opciones-lista">
+          <label class="opcion-item"><input type="radio" name="permiso" value="si"><span>Sí</span></label>
+          <label class="opcion-item"><input type="radio" name="permiso" value="anonimo"><span>Anónimo</span></label>
+          <label class="opcion-item"><input type="radio" name="permiso" value="no"><span>No</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Para mejorar</p>
+      <div class="test-grupo">
+        <label>¿Qué fue lo mejor y qué cambiarías del proceso?</label>
+        <textarea id="t-cambios" placeholder="Con total sinceridad — esto es lo que más me sirve para mejorar."></textarea>
+      </div>
+    </div>
+
+    <div class="test-seccion">
+      <p class="test-seccion-label">Antes de cerrar</p>
+      <div class="test-grupo">
+        <label>¿Nos dejarías una reseña? <span class="sub">Unas líneas contando tu experiencia — la uso tal cual (con el permiso que marcaste arriba) para que otras personas conozcan LARŌ.</span></label>
+        <textarea id="t-referido-nombre" placeholder="Escribe aquí tu reseña..."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-enviar">Enviar mis respuestas a Sarai</button>
+
+  </form>
+
+  <!-- RESULTADO -->
+  <div class="resultado" id="resultado">
+    <h2 class="resultado-titulo">Gracias. <em>De corazón.</em></h2>
+    <p class="resultado-sub" id="resultado-sub">Ya me ha llegado. Gracias por dedicarle este ratito.</p>
+    <iframe name="laro-form-submit" title="Confirmación" style="width:60px;height:40px;border:none;margin-top:8px"></iframe>
+  </div>
+
+  <footer-test>LARŌ · Organic Skin Rituals · hola@larō.com</footer-test>
+</div>
+
+<script>
+const form = document.getElementById('test-form');
+const resultado = document.getElementById('resultado');
+
+const DRAFT_KEY = 'laro_testimonio_draft_v1';
+
+function guardarBorrador() {
+  const data = {};
+  form.querySelectorAll('input, select, textarea').forEach(el => {
+    if (!el.name && !el.id) return;
+    if (el.type === 'checkbox' || el.type === 'radio') {
+      const k = el.name || el.id;
+      if (!data[k]) data[k] = [];
+      if (el.checked && !data[k].includes(el.value)) data[k].push(el.value);
+    } else if (el.id) {
+      data[el.id] = el.value;
+    }
+  });
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (e) {}
+}
+
+function restaurarBorrador() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(DRAFT_KEY)); } catch (e) { return; }
+  if (!data) return;
+  let algoRestaurado = false;
+  form.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.type === 'checkbox' || el.type === 'radio') {
+      const k = el.name || el.id;
+      if (data[k] && data[k].includes(el.value)) { el.checked = true; algoRestaurado = true; }
+    } else if (el.id && data[el.id]) {
+      el.value = data[el.id];
+      algoRestaurado = true;
+    }
+  });
+  if (algoRestaurado) document.getElementById('aviso-borrador').style.display = 'block';
+}
+
+restaurarBorrador();
+form.addEventListener('input', guardarBorrador);
+form.addEventListener('change', guardarBorrador);
+
+// Google Form real (cuenta personal de Sarai, sin restricción de Workspace).
+const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfttM9Ki248TSd_BQGGvK3xxl_VNgZQ92uHMcnWBF7jpb-1Lg/formResponse';
+const ENTRY_IDS = {
+  nombre:            'entry.1972088694',
+  valoracionGeneral: 'entry.1774452721',
+  fraseTestimonio:   'entry.453482967',
+  recomendaria:      'entry.787640190',
+  permisoCompartir:  'entry.699071012',
+  queCambiarias:     'entry.1504238135',
+  resena:            'entry.1103980576',
+};
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const checks = name => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(c => c.value);
+
+  const datos = {
+    nombre:            val('t-nombre'),
+    valoracionGeneral: val('t-valoracion'),
+    fraseTestimonio:   val('t-frase'),
+    recomendaria:      checks('recomienda')[0] || '',
+    permisoCompartir:  checks('permiso')[0] || '',
+    queCambiarias:     val('t-cambios'),
+    resena:            val('t-referido-nombre'),
+  };
+
+  // Navegación real a un iframe VISIBLE (no oculto) — Safari bloquea en silencio las
+  // técnicas invisibles (display:none, pestañas ocultas) hacia dominios de Google por
+  // parecer rastreo, pero no bloquea un iframe visible normal, como cualquier vídeo
+  // incrustado. Así todo pasa dentro de la propia página de LARŌ, sin pestañas nuevas.
+  try { localStorage.removeItem(DRAFT_KEY); } catch (err) {}
+
+  const tempForm = document.createElement('form');
+  tempForm.action = FORM_URL;
+  tempForm.method = 'POST';
+  tempForm.target = 'laro-form-submit';
+  Object.keys(ENTRY_IDS).forEach(k => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = ENTRY_IDS[k];
+    input.value = datos[k] || '';
+    tempForm.appendChild(input);
+  });
+  document.body.appendChild(tempForm);
+  tempForm.submit();
+  tempForm.remove();
+
+  form.style.display = 'none';
+  document.querySelector('.test-header').style.display = 'none';
+  resultado.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
