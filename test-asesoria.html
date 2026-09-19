@@ -450,8 +450,8 @@
         <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--garnet);line-height:1;flex-shrink:0">📷</span>
         <div style="flex:1">
           <p style="font-weight:700;font-size:0.88rem;margin-bottom:6px">Una foto de tu piel, si quieres <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">(opcional)</span></p>
-          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Puedes subir una o varias fotos aquí (te pedirá iniciar sesión con una cuenta de Google), o si prefieres, mándamelas a <strong style="color:var(--dark)">hola@larō.com</strong>.</p>
-          <a class="btn-email" id="btn-subir-foto" href="#" target="_blank" rel="noopener">Subir foto(s)</a>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Puedes subir una o varias fotos aquí (te pedirá iniciar sesión con una cuenta de Google y tu nombre, ya que es un formulario aparte), o si prefieres, mándamelas a <strong style="color:var(--dark)">hola@larō.com</strong>.</p>
+          <a class="btn-email" id="btn-subir-foto" href="https://docs.google.com/forms/d/e/1FAIpQLSekE88YZwF_iSW4nrjjMv7y4pqZiuTnhsYR9_JEmWgMwzCQtQ/viewform" target="_blank" rel="noopener">Subir foto(s)</a>
         </div>
       </div>
     </div>
@@ -602,14 +602,6 @@ form.addEventListener('submit', function(e) {
   const asunto = encodeURIComponent(`Test de asesoría LARŌ — ${datos.nombre}`);
   const cuerpo = encodeURIComponent(`Hola Sarai,\n\nAquí te mando el código de importación de mi test de piel. Pégalo donde pone [CÓDIGO]:\n\n[CÓDIGO]\n\n(Si quiero, adjunto aquí también una foto de mi piel.)\n\n${datos.nombre}`);
   document.getElementById('btn-mailto').href = `mailto:hola@xn--lar-sxa.com?subject=${asunto}&body=${cuerpo}`;
-
-  // Link directo al Google Form real, precompletado con el nombre, para subir
-  // la(s) foto(s) — la pregunta "Foto" es de tipo "Subir archivo" nativo, que
-  // usa Google Drive por dentro y no se puede rellenar con un POST propio
-  // (a diferencia de Nombre/Código, que son texto). Requiere que la clienta
-  // inicie sesión con una cuenta de Google; limitación de Google, no evitable.
-  document.getElementById('btn-subir-foto').href =
-    `https://docs.google.com/forms/d/e/1FAIpQLSdfyk4lAkAyHN9IibHRoHnVOKHBFTEY2naCm-VkYnxWWztL2g/viewform?usp=pp_url&entry.259763586=${encodeURIComponent(datos.nombre || '')}`;
 
   // Envío automático del código a un Google Form (cuenta personal de Sarai) — cae en una
   // Hoja de cálculo que ella importa en su herramienta. Iframe visible (no oculto): Safari
