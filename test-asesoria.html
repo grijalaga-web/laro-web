@@ -450,11 +450,8 @@
         <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--garnet);line-height:1;flex-shrink:0">📷</span>
         <div style="flex:1">
           <p style="font-weight:700;font-size:0.88rem;margin-bottom:6px">Una foto de tu piel, si quieres <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">(opcional)</span></p>
-          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Puedes subirla aquí directamente, o si prefieres, mándamela a <strong style="color:var(--dark)">hola@larō.com</strong>.</p>
-          <input type="file" id="t-foto" accept="image/*" style="font-size:0.82rem;margin-bottom:8px;display:block">
-          <button type="button" class="btn-copiar" id="btn-enviar-foto" onclick="enviarFoto()" disabled>Enviar foto</button>
-          <p class="copiado" id="msg-foto-enviada">✓ Foto enviada</p>
-          <p style="font-size:0.75rem;color:var(--muted);margin-top:6px" id="msg-foto-procesando"></p>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px">Puedes subir una o varias fotos aquí (te pedirá iniciar sesión con una cuenta de Google), o si prefieres, mándamelas a <strong style="color:var(--dark)">hola@larō.com</strong>.</p>
+          <a class="btn-email" id="btn-subir-foto" href="#" target="_blank" rel="noopener">Subir foto(s)</a>
         </div>
       </div>
     </div>
@@ -606,6 +603,14 @@ form.addEventListener('submit', function(e) {
   const cuerpo = encodeURIComponent(`Hola Sarai,\n\nAquí te mando el código de importación de mi test de piel. Pégalo donde pone [CÓDIGO]:\n\n[CÓDIGO]\n\n(Si quiero, adjunto aquí también una foto de mi piel.)\n\n${datos.nombre}`);
   document.getElementById('btn-mailto').href = `mailto:hola@xn--lar-sxa.com?subject=${asunto}&body=${cuerpo}`;
 
+  // Link directo al Google Form real, precompletado con el nombre, para subir
+  // la(s) foto(s) — la pregunta "Foto" es de tipo "Subir archivo" nativo, que
+  // usa Google Drive por dentro y no se puede rellenar con un POST propio
+  // (a diferencia de Nombre/Código, que son texto). Requiere que la clienta
+  // inicie sesión con una cuenta de Google; limitación de Google, no evitable.
+  document.getElementById('btn-subir-foto').href =
+    `https://docs.google.com/forms/d/e/1FAIpQLSdfyk4lAkAyHN9IibHRoHnVOKHBFTEY2naCm-VkYnxWWztL2g/viewform?usp=pp_url&entry.259763586=${encodeURIComponent(datos.nombre || '')}`;
+
   // Envío automático del código a un Google Form (cuenta personal de Sarai) — cae en una
   // Hoja de cálculo que ella importa en su herramienta. Iframe visible (no oculto): Safari
   // bloquea en silencio los envíos invisibles hacia dominios de Google.
@@ -634,63 +639,6 @@ form.addEventListener('submit', function(e) {
 }
 
 );
-
-// ── FOTO (comprimida en el navegador, enviada al mismo Google Form) ─────────
-let fotoBase64 = '';
-document.getElementById('t-foto').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  const btn = document.getElementById('btn-enviar-foto');
-  const msgProc = document.getElementById('msg-foto-procesando');
-  fotoBase64 = '';
-  btn.disabled = true;
-  if (!file) { msgProc.textContent = ''; return; }
-  msgProc.textContent = 'Preparando foto...';
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    const img = new Image();
-    img.onload = function() {
-      const MAX = 900;
-      let w = img.width, h = img.height;
-      if (w > h && w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
-      else if (h >= w && h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      fotoBase64 = canvas.toDataURL('image/jpeg', 0.6).split(',')[1] || '';
-      msgProc.textContent = fotoBase64 ? 'Foto lista para enviar.' : 'No se pudo leer la foto.';
-      btn.disabled = !fotoBase64;
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
-});
-
-function enviarFoto() {
-  if (!fotoBase64) return;
-  const nombre = (document.getElementById('t-nombre')?.value || '').trim();
-  const fotoForm = document.createElement('form');
-  fotoForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdfyk4lAkAyHN9IibHRoHnVOKHBFTEY2naCm-VkYnxWWztL2g/formResponse';
-  fotoForm.method = 'POST';
-  fotoForm.target = 'laro-code-submit';
-  const inputNombre = document.createElement('input');
-  inputNombre.type = 'hidden';
-  inputNombre.name = 'entry.259763586';
-  inputNombre.value = nombre;
-  const inputFoto = document.createElement('input');
-  inputFoto.type = 'hidden';
-  inputFoto.name = 'entry.821880309';
-  inputFoto.value = fotoBase64;
-  fotoForm.appendChild(inputNombre);
-  fotoForm.appendChild(inputFoto);
-  document.body.appendChild(fotoForm);
-  fotoForm.submit();
-  fotoForm.remove();
-
-  document.getElementById('btn-enviar-foto').style.display = 'none';
-  document.getElementById('t-foto').style.display = 'none';
-  document.getElementById('msg-foto-procesando').textContent = '';
-  document.getElementById('msg-foto-enviada').style.display = 'block';
-}
 
 function copiarCodigo() {
   const txt = document.getElementById('codigo-output').textContent;
