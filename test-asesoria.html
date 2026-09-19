@@ -113,6 +113,23 @@
     margin-right: 12px; margin-top: 12px;
   }
   .btn-copiar:hover { background: var(--garnet); color: var(--cream); }
+  .producto-row {
+    display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 8px;
+  }
+  .producto-row input { margin: 0; }
+  .btn-quitar-producto {
+    background: transparent; border: 1px solid var(--pink); color: var(--muted);
+    cursor: pointer; font-size: 0.9rem; width: 44px;
+  }
+  .btn-quitar-producto:hover { border-color: var(--garnet); color: var(--garnet); }
+  .btn-add-producto {
+    display: inline-block; padding: 9px 20px; margin-top: 4px;
+    background: transparent; color: var(--garnet);
+    font-family: 'Lato', sans-serif; font-size: 0.72rem;
+    font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    border: 1px solid var(--garnet); cursor: pointer; transition: all 0.2s;
+  }
+  .btn-add-producto:hover { background: var(--garnet); color: var(--cream); }
   .btn-email {
     display: inline-block; padding: 10px 24px;
     background: var(--garnet); color: var(--cream);
@@ -357,8 +374,9 @@
     <div class="test-seccion">
       <p class="test-seccion-label">Rutina actual y objetivos</p>
       <div class="test-grupo">
-        <label>¿Qué productos usas ahora mismo? <span class="sub">Mañana y noche, todo lo que apliques en la cara.</span></label>
-        <textarea id="t-rutina" placeholder="Ej: Agua micelar Bioderma por la mañana · Crema hidratante Avène · Noche: lo mismo + aceite de argán..."></textarea>
+        <label>¿Qué productos usas ahora mismo? <span class="sub">Nombre y marca de cada uno, todo lo que apliques en la cara mañana o noche.</span></label>
+        <div id="productos-list"></div>
+        <button type="button" class="btn-add-producto" onclick="anadirProducto()">+ Añadir producto</button>
       </div>
       <div class="test-grupo">
         <label>¿Te maquillas a diario?</label>
@@ -469,9 +487,33 @@ const resultado = document.getElementById('resultado');
 // ── BORRADOR AUTOMÁTICO (por si se cierra la pestaña a medias) ──────────────
 const DRAFT_KEY = 'laro_test_draft_v1';
 
+// ── PRODUCTOS (nombre + marca, filas dinámicas) ─────────────────────────────
+function anadirProducto(nombre, marca) {
+  const list = document.getElementById('productos-list');
+  const row = document.createElement('div');
+  row.className = 'producto-row';
+  const nombreVal = (nombre || '').replace(/"/g, '&quot;');
+  const marcaVal = (marca || '').replace(/"/g, '&quot;');
+  row.innerHTML = `
+    <input type="text" class="producto-nombre" placeholder="Nombre del producto" value="${nombreVal}">
+    <input type="text" class="producto-marca" placeholder="Marca" value="${marcaVal}">
+    <button type="button" class="btn-quitar-producto" onclick="this.closest('.producto-row').remove()" aria-label="Quitar producto">✕</button>
+  `;
+  list.appendChild(row);
+}
+function getProductos() {
+  return Array.from(document.querySelectorAll('.producto-row')).map(row => ({
+    nombre: row.querySelector('.producto-nombre').value.trim(),
+    marca: row.querySelector('.producto-marca').value.trim(),
+  })).filter(p => p.nombre || p.marca);
+}
+anadirProducto();
+anadirProducto();
+
 function guardarBorrador() {
   const data = {};
   form.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.classList.contains('producto-nombre') || el.classList.contains('producto-marca')) return;
     if (!el.name && !el.id) return;
     if (el.type === 'checkbox' || el.type === 'radio') {
       const k = el.name || el.id;
@@ -481,6 +523,7 @@ function guardarBorrador() {
       data[el.id] = el.value;
     }
   });
+  data._productos = getProductos();
   try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (e) {}
 }
 
@@ -489,7 +532,13 @@ function restaurarBorrador() {
   try { data = JSON.parse(localStorage.getItem(DRAFT_KEY)); } catch (e) { return; }
   if (!data) return;
   let algoRestaurado = false;
+  if (data._productos && data._productos.length) {
+    document.getElementById('productos-list').innerHTML = '';
+    data._productos.forEach(p => anadirProducto(p.nombre, p.marca));
+    algoRestaurado = true;
+  }
   form.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.classList.contains('producto-nombre') || el.classList.contains('producto-marca')) return;
     if (el.type === 'checkbox' || el.type === 'radio') {
       const k = el.name || el.id;
       if (data[k] && data[k].includes(el.value)) { el.checked = true; algoRestaurado = true; }
@@ -534,13 +583,12 @@ form.addEventListener('submit', function(e) {
     estres:           val('t-estres'),
     sueno:            val('t-sueno'),
     agua:             val('t-agua'),
-    rutina:           val('t-rutina'),
+    productos:        getProductos(),
     maquillajeDiario: val('t-maquillaje'),
     tipoCosmetica:    val('t-tipo-cosmetica'),
     tiempoRutina:     val('t-tiempo'),
     objetivos:        checks('objetivos'),
     presupuesto:      val('t-presupuesto'),
-    notasIniciales:   val('t-libre'),
     fechaAlta:        new Date().toLocaleDateString('es-ES'),
     _origen:          'test-piel-web',
   };
